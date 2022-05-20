@@ -1,0 +1,10 @@
+/node_modules
+
+/public/*
+!/public/assets
+!/public/index.html
+!/public/favicon.ico
+!/public/manifest.json
+!/public/robots.txt
+
+/build

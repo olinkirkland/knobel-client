@@ -1,0 +1,402 @@
+[
+  {
+    "id": "system-avatar",
+    "type": "avatar",
+    "name": "System Avatar",
+    "description": "",
+    "tags": [],
+    "value": {
+      "url": "avatars/system.png"
+    }
+  },
+  {
+    "id": "Q8OK-24Eq",
+    "type": "avatar",
+    "name": "Dragon",
+    "description": "A fierce dragon.",
+    "tags": [],
+    "value": {
+      "url": "avatars/dragon.png"
+    }
+  },
+  {
+    "id": "YYLG-dTj5",
+    "type": "avatar",
+    "name": "Unicorn",
+    "description": "This noble unicorn will guide you to success.",
+    "tags": [],
+    "value": {
+      "url": "avatars/unicorn.png"
+    }
+  },
+  {
+    "id": "Ynmr-Vnp0",
+    "type": "avatar",
+    "name": "Spider",
+    "description": "Will its bite poison you or give you powers?",
+    "tags": [],
+    "value": {
+      "url": "avatars/spider.png"
+    }
+  },
+  {
+    "id": "6o99-OgKj",
+    "type": "avatar",
+    "name": "Horse",
+    "description": "Steadfast and reliable.",
+    "tags": [],
+    "value": {
+      "url": "avatars/horse.png"
+    }
+  },
+  {
+    "id": "lAaK-Dezj",
+    "type": "avatar",
+    "name": "Cat",
+    "description": "Meow!",
+    "tags": [],
+    "value": {
+      "url": "avatars/cat.png"
+    }
+  },
+  {
+    "id": "WYYx-k6Bl",
+    "type": "avatar",
+    "name": "Dog",
+    "description": "Woof!",
+    "tags": [],
+    "value": {
+      "url": "avatars/dog.png"
+    }
+  },
+  {
+    "id": "U1Km-qAeN",
+    "type": "avatar",
+    "name": "Starfish",
+    "description": "Did you know that starfish regenerate their limbs?",
+    "tags": [],
+    "value": {
+      "url": "avatars/starfish.png"
+    }
+  },
+  {
+    "id": "UK87-Ojhs",
+    "type": "avatar",
+    "name": "Octopus",
+    "description": "A slippery companion.",
+    "tags": [],
+    "value": {
+      "url": "avatars/octopus.png"
+    }
+  },
+  {
+    "id": "Oleu-mVBt",
+    "type": "avatar",
+    "name": "Bear",
+    "description": "Careful with this one - he's hungry.",
+    "tags": [],
+    "value": {
+      "url": "avatars/bear.png"
+    }
+  },
+  {
+    "id": "qWqW-UveS",
+    "type": "avatar",
+    "name": "Lion",
+    "description": "He's the king of the jungle.",
+    "tags": [],
+    "value": {
+      "url": "avatars/lion.png"
+    }
+  },
+  {
+    "id": "hL0q-KHyj",
+    "type": "avatar",
+    "name": "Panda",
+    "description": "Find him some bamboo!",
+    "tags": [],
+    "value": {
+      "url": "avatars/panda.png"
+    }
+  },
+  {
+    "id": "ZjWY-559U",
+    "type": "avatar",
+    "name": "Wolf",
+    "description": "Howling at the moon.",
+    "tags": [],
+    "value": {
+      "url": "avatars/wolf.png"
+    }
+  },
+  {
+    "id": "2eCm-MAws",
+    "type": "avatar",
+    "name": "Fire",
+    "description": "Warm your hands by this fire.",
+    "tags": [],
+    "value": {
+      "url": "avatars/fire.png"
+    }
+  },
+  {
+    "id": "ibGS-6Bjc",
+    "type": "avatar",
+    "name": "Moon and Stars",
+    "description": "It's easier to see these at night.",
+    "tags": [],
+    "value": {
+      "url": "avatars/moon-and-stars.png"
+    }
+  },
+  {
+    "id": "Pu1h-C0iy",
+    "type": "avatar",
+    "name": "Constellation",
+    "description": "I wonder what it means?",
+    "tags": [],
+    "value": {
+      "url": "avatars/constellation.png"
+    }
+  },
+  {
+    "id": "4gMz-7lly",
+    "type": "avatar",
+    "name": "ABC Block",
+    "description": "Everything starts somewhere.",
+    "tags": [],
+    "value": {
+      "url": "avatars/block.png"
+    }
+  },
+  {
+    "id": "gdW7-TJ2s",
+    "type": "avatar",
+    "name": "Autumn",
+    "description": "Colorful leaves crunch underfoot.",
+    "tags": [],
+    "value": {
+      "url": "avatars/autumn.png"
+    }
+  },
+  {
+    "id": "jkKG-duLf",
+    "type": "avatar",
+    "name": "Spring",
+    "description": "Growth and harmony.",
+    "tags": [],
+    "value": {
+      "url": "avatars/spring.png"
+    }
+  },
+  {
+    "id": "MPR6-uyhX",
+    "type": "avatar",
+    "name": "Summer",
+    "description": "Hot and humid - the best time for a day at the lake!",
+    "tags": [],
+    "value": {
+      "url": "avatars/summer.png"
+    }
+  },
+  {
+    "id": "uWOH-hXig",
+    "type": "avatar",
+    "name": "Winter",
+    "description": "Snowflakes falling behind frosted glass.",
+    "tags": [],
+    "value": {
+      "url": "avatars/winter.png"
+    }
+  },
+  {
+    "id": "4dHO-hXoe",
+    "type": "avatar",
+    "name": "Teddy Bear",
+    "description": "He's not lost, he's exploring.",
+    "tags": [],
+    "value": {
+      "url": "avatars/teddy-bear.png"
+    }
+  },
+  {
+    "id": "beQ9-2SmO",
+    "type": "avatar",
+    "name": "Yin Yang",
+    "description": "Two parts of a whole.",
+    "tags": [],
+    "value": {
+      "url": "avatars/yin-yang.png"
+    }
+  },
+  {
+    "id": "GobD-Q55w",
+    "type": "avatar",
+    "name": "Anubis",
+    "description": "The son of Osiris and Nephthys.",
+    "tags": [],
+    "value": {
+      "url": "avatars/anubis.png"
+    }
+  },
+  {
+    "id": "R9OC-xw8g",
+    "type": "avatar",
+    "name": "Eiffel Tower",
+    "description": "Have you been to the top?",
+    "tags": [],
+    "value": {
+      "url": "avatars/eiffel-tower.png"
+    }
+  },
+  {
+    "id": "vxeN-fnax",
+    "type": "avatar",
+    "name": "Beer Mug",
+    "description": "Prost!",
+    "tags": [],
+    "value": {
+      "url": "avatars/beer.png"
+    }
+  },
+  {
+    "id": "SEsp-Kzro",
+    "type": "avatar",
+    "name": "Temple",
+    "description": "A solemn occasion.",
+    "tags": [],
+    "value": {
+      "url": "avatars/temple.png"
+    }
+  },
+  {
+    "id": "FTkA-q8uQ",
+    "type": "avatar",
+    "name": "Day of the Dead",
+    "description": "Have you decorated your ofrenda?",
+    "tags": [],
+    "value": {
+      "url": "avatars/day-of-the-dead.png"
+    }
+  },
+  {
+    "id": "aYEo-4MEy",
+    "type": "avatar",
+    "name": "Viking Helmet",
+    "description": "Worn into battle.",
+    "tags": [],
+    "value": {
+      "url": "avatars/viking-helmet.png"
+    }
+  },
+  {
+    "id": "ioJp-IGWD",
+    "type": "avatar",
+    "name": "Crown",
+    "description": "Worn from a throne.",
+    "tags": [],
+    "value": {
+      "url": "avatars/crown.png"
+    }
+  },
+  {
+    "id": "AGKi-4sNV",
+    "type": "avatar",
+    "name": "Ghost",
+    "description": "Boo!",
+    "tags": [],
+    "value": {
+      "url": "avatars/ghost.png"
+    }
+  },
+  {
+    "id": "E2cw-zPu7",
+    "type": "avatar",
+    "name": "Skull",
+    "description": "Probably from a spooky skeleton.",
+    "tags": [],
+    "value": {
+      "url": "avatars/skull.png"
+    }
+  },
+  {
+    "id": "Cszi-CY2z",
+    "type": "avatar",
+    "name": "Wizard Hat",
+    "description": "I put on my robe and wizard hat.",
+    "tags": [],
+    "value": {
+      "url": "avatars/wizard-hat.png"
+    }
+  },
+  {
+    "id": "w6DX-sOwN",
+    "type": "avatar",
+    "name": "Flower",
+    "description": "A beautiful blossom.",
+    "tags": [],
+    "value": {
+      "url": "avatars/flower.png"
+    }
+  },
+  {
+    "id": "EEoy-n0mL",
+    "type": "avatar",
+    "name": "Strawberry",
+    "description": "Sweet!",
+    "tags": [],
+    "value": {
+      "url": "avatars/strawberry.png"
+    }
+  },
+  {
+    "id": "uGVh-6sLQ",
+    "type": "avatar",
+    "name": "Apple",
+    "description": "It's an apple.",
+    "tags": [],
+    "value": {
+      "url": "avatars/apple.png"
+    }
+  },
+  {
+    "id": "jNwF-dOci",
+    "type": "avatar",
+    "name": "Peach",
+    "description": "It's a peach.",
+    "tags": [],
+    "value": {
+      "url": "avatars/peach.png"
+    }
+  },
+  {
+    "id": "TatE-UdTY",
+    "type": "avatar",
+    "name": "Treble Clef",
+    "description": "It's a treble clef.",
+    "tags": [],
+    "value": {
+      "url": "avatars/treble-clef.png"
+    }
+  },
+  {
+    "id": "uEt8-KKW9",
+    "type": "avatar",
+    "name": "Bass Clef",
+    "description": "It's a bass clef.",
+    "tags": [],
+    "value": {
+      "url": "avatars/bass-clef.png"
+    }
+  },
+  {
+    "id": "inmQ-K0Zd",
+    "type": "avatar",
+    "name": "Comedy",
+    "description": "What's so funny?",
+    "tags": [],
+    "value": {
+      "url": "avatars/comedy.png"
+    }
+  }
+]

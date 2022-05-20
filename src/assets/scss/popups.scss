@@ -1,0 +1,208 @@
+@import 'colors';
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .popup {
+    background-color: $panel;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 5px 0px;
+    min-width: 40rem;
+    max-width: 60rem;
+    max-height: 80vh;
+    margin: 2rem;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    &.popup-fit {
+      min-width: 0;
+    }
+
+    &.popup-profile {
+      width: 80rem;
+    }
+
+    &.popup-shop {
+      width: 120rem;
+      max-width: 120rem;
+
+      .gold-box {
+        img {
+          height: 2rem;
+        }
+
+        .gold-text {
+          color: $text-muted;
+        }
+      }
+    }
+
+    .popup-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.4rem;
+      padding: 1.4rem 1.8rem;
+      background-color: $primary-muted;
+      color: $primary;
+
+      &.popup-error {
+        background-color: $error-muted;
+        color: $error;
+      }
+
+      &.popup-success {
+        background-color: $success-muted;
+        color: $success;
+      }
+
+      &.popup-loading {
+        color: white;
+        background-color: $text-muted;
+      }
+    }
+
+    .popup-content {
+      padding: 2rem 2rem;
+      max-width: 100%;
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+
+      ul.popup-book {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        // Title
+        h2 {
+        }
+
+        // Body
+        p {
+        }
+
+        // Image
+        img {
+          border-radius: 5px;
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+
+    .guest-badge {
+      background-color: transparent;
+      box-shadow: none;
+    }
+
+    .popup-taskbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 1.4rem 1.8rem;
+      border-top: 1px dashed $darker;
+    }
+  }
+}
+
+// My Profile Popup
+.profile-data {
+  .warn {
+    margin-bottom: 2rem;
+  }
+
+  img.avatar {
+    position: static;
+    transform: rotate(0);
+    width: 8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .level-group {
+    gap: 0.4rem;
+    margin: 1rem 0 2rem 0;
+  }
+
+  .profile-editable-item {
+    display: flex;
+    gap: 1rem;
+
+    button {
+      margin-left: auto;
+    }
+  }
+}
+
+div.user-with-badge {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+// Popup
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  background-color: #00000060;
+}
+
+.item-definition {
+  width: 100%;
+  border-top: 1px dashed $dark;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+ul.game-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+li.join-game-tile {
+  padding: 1rem;
+  background-color: white;
+  position: relative;
+  opacity: 1;
+  cursor: pointer;
+  border-radius: 5px;
+  bottom: 0;
+  opacity: 0.7;
+  transition: all 0.3s;
+  display: flex;
+  justify-content: space-between;
+
+  .player-count {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+ul.game-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

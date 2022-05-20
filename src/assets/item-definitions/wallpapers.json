@@ -1,0 +1,62 @@
+[
+  {
+    "id": "nbKnDUBgYwiQcUJjI8gYG",
+    "type": "wallpaper",
+    "name": "Prism",
+    "description": "A subtle geometric pattern.",
+    "tags": [],
+    "value": {
+      "url": "wallpapers/prism.png"
+    }
+  },
+  {
+    "id": "KgkdXnvuUjgFg9mFsF_o1",
+    "type": "wallpaper",
+    "name": "Seigaiha",
+    "description": "A pleasant wave-like pattern.",
+    "tags": [],
+    "value": {
+      "url": "wallpapers/seigaiha.png"
+    }
+  },
+  {
+    "id": "bWlODlitPpTpauqu7egQW",
+    "type": "wallpaper",
+    "name": "Love",
+    "description": "Show your love by using this pattern.",
+    "tags": [],
+    "value": {
+      "url": "wallpapers/love.png"
+    }
+  },
+  {
+    "id": "249573cc1e6ac120X00a2",
+    "type": "wallpaper",
+    "name": "Floral",
+    "description": "A fancy floral pattern.",
+    "tags": [],
+    "value": {
+      "url": "wallpapers/floral.png"
+    }
+  },
+  {
+    "id": "nhXUB0VIsA7ST25S-wG6e",
+    "type": "wallpaper",
+    "name": "Cosmic",
+    "description": "Swirling stars and planets.",
+    "tags": [],
+    "value": {
+      "url": "wallpapers/cosmic.png"
+    }
+  },
+  {
+    "id": "absdidf9xc-sdf98xiddk",
+    "type": "wallpaper",
+    "name": "Sky",
+    "description": "A relaxing solid blue wallpaper.",
+    "tags": [],
+    "value": {
+      "url": "wallpapers/sky.png"
+    }
+  }
+]

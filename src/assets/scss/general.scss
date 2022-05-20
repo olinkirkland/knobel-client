@@ -1,0 +1,317 @@
+@import 'colors';
+
+html {
+  /* Percentage of user's browser font-size setting */
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.6rem;
+  color: $text;
+}
+
+h1 {
+  font-size: 2.4rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+p {
+  font-size: 1.6rem;
+}
+
+img.icon {
+  width: 2rem;
+  height: 2rem;
+  align-self: center;
+  position: relative;
+  top: 4.5px;
+  margin: 0 0.4rem 0 0;
+}
+
+div.alert {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  padding: 1rem 1rem;
+  border-radius: 5px;
+
+  img {
+    width: 5rem;
+  }
+
+  &.warn {
+    color: $warn;
+    background-color: $warn-muted;
+  }
+  &.error {
+    color: $error;
+    background-color: $error-muted;
+  }
+
+  button {
+    margin-left: auto;
+  }
+}
+
+button {
+  cursor: pointer;
+  font-family: 'Outfit', serif;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 99px;
+  background-color: #00000070;
+
+  transition: all 0.3s;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  // border: 2px solid transparent;
+
+  img {
+    height: 1.6rem;
+    width: 1.6rem;
+  }
+
+  &.button-close {
+    padding: 0;
+    margin: 0;
+    color: currentColor;
+    background-color: transparent;
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    &:active {
+      background-color: transparent;
+    }
+  }
+
+  &.disabled {
+    opacity: 0.4;
+    cursor: inherit;
+
+    &:hover {
+      background-color: #00000070;
+    }
+
+    &:active {
+      background-color: #00000070;
+    }
+  }
+
+  &:hover {
+    background-color: #00000090;
+  }
+
+  &:active {
+    background-color: #00000095;
+  }
+
+  &.selected {
+    background-color: $primary;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+button.link {
+  background-color: transparent;
+  color: $text-muted;
+  border-radius: 0;
+  padding: 0;
+  text-transform: none;
+  letter-spacing: 0.6px;
+
+  &:hover {
+    background-color: transparent;
+    color: $text;
+  }
+
+  &:active {
+    background-color: transparent;
+  }
+}
+
+::selection,
+::-moz-selection {
+  background: $primary-muted;
+}
+
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+pre {
+  user-select: text;
+  color: $text;
+  font-family: 'Inconsolata', monospace !important;
+  white-space: pre-wrap;
+  font-size: 1.2rem;
+  line-height: 2rem;
+}
+
+div.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  color: $text-muted;
+}
+
+input[type='text'],
+input[type='password'] {
+  user-select: auto;
+  font-family: 'Outfit', serif;
+  height: 3.2rem;
+  padding: 2rem 1.6rem;
+  border: 1px solid $dark;
+  border-radius: 10px;
+  background-color: white;
+  transition: all 0.3s;
+  color: $text;
+
+  &::placeholder {
+    opacity: 1;
+    color: $darker;
+  }
+
+  &:hover {
+    border-bottom: 1px solid $dark;
+  }
+
+  &:focus {
+    border-bottom: 1px solid $darker;
+  }
+
+  &:focus::placeholder {
+    color: transparent;
+  }
+}
+
+.checkbox {
+  cursor: pointer;
+  display: flex;
+  width: fit-content;
+  gap: 0.4rem;
+  align-items: center;
+  transition: all 0.3s;
+  color: $text-muted;
+  opacity: 0.8;
+
+  .icon-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    color: white;
+    border-radius: 3px;
+    background-color: $dark;
+    font-size: 1rem;
+  }
+
+  .icon-frame.checked {
+    background-color: $primary;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+li {
+  list-style: none;
+}
+
+.h-group {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.v-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.spread {
+  gap: 2rem;
+}
+
+.panel {
+  padding: 2rem;
+  // background-color: var(--dark);
+  border: 1px dashed $darker;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-solid {
+  font-size: 1.6rem;
+  color: $primary;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.muted {
+  opacity: 0.5;
+}
+
+.emphasized {
+  font-weight: 300;
+  font-style: italic;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.vertical-separator {
+  height: 100%;
+  margin: 0 1rem;
+  padding: 0;
+  width: 1px;
+  border-right: 1px dashed $dark;
+}
+
+.align-right {
+  margin-left: auto;
+}
+
+.no-gap {
+  gap: 0;
+}
