@@ -1,0 +1,104 @@
+@import "colors";
+
+button {
+  cursor: pointer;
+  font-family: "Outfit", serif;
+  border: none;
+
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+button.primary {
+  padding: 0.6rem 1.2rem;
+  border-radius: 99px;
+  background-color: #00000070;
+
+  transition: all 0.3s;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  img {
+    height: 1.6rem;
+    width: 1.6rem;
+  }
+
+  &.button-close {
+    padding: 0;
+    margin: 0;
+    color: currentColor;
+    background-color: transparent;
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    &:active {
+      background-color: transparent;
+    }
+  }
+
+  &.disabled {
+    opacity: 0.4;
+    cursor: inherit;
+
+    &:hover {
+      background-color: #00000070;
+    }
+
+    &:active {
+      background-color: #00000070;
+    }
+  }
+
+  &:hover {
+    background-color: #00000090;
+  }
+
+  &:active {
+    background-color: #00000095;
+  }
+
+  &.selected {
+    background-color: $primary;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+button.link {
+  background-color: transparent;
+  color: $text-muted;
+  border-radius: 0;
+  padding: 0;
+  text-transform: none;
+  letter-spacing: 0.6px;
+
+  &:hover {
+    background-color: transparent;
+    color: $text;
+  }
+
+  &:active {
+    background-color: transparent;
+  }
+}
+
+button.btn-taskbar {
+  height: 100%;
+  padding: 0 2rem;
+  background-color: transparent;
+  color: $text-muted;
+
+  // Align left (default)
+  &:not(.align-right) {
+    border-right: 1px dashed $text-muted;
+  }
+
+  // Align right
+  &.align-right {
+    justify-content: flex-end;
+    border-left: 1px dashed $text-muted;
+  }
+}

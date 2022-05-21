@@ -1,9 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { PopupProps } from 'react-popup-manager';
-import Connection from '../../connection/Connection';
 import { rootElement } from '../../index';
-import { validateEmail } from '../../Util';
 import Checkbox from '../Checkbox';
 
 type State = {
@@ -35,11 +33,11 @@ export class PopupLogin extends React.Component<PopupLoginProps> {
     }
 
     // Login
-    Connection.instance.login(
-      this.state.email,
-      this.state.password,
-      this.state.staySignedIn
-    );
+    // Connection.instance.login(
+    //   this.state.email,
+    //   this.state.password,
+    //   this.state.staySignedIn
+    // );
     onClose!();
   }
 

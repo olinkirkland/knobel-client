@@ -1,0 +1,32 @@
+@import 'colors';
+
+.checkbox {
+  cursor: pointer;
+  display: flex;
+  width: fit-content;
+  gap: 0.4rem;
+  align-items: center;
+  transition: all 0.3s;
+  color: $text-muted;
+  opacity: 0.8;
+
+  .icon-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    color: white;
+    border-radius: 3px;
+    background-color: $dark;
+    font-size: 1rem;
+  }
+
+  .icon-frame.checked {
+    background-color: $primary;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}

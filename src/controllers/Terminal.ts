@@ -1,6 +1,6 @@
 import EventEmitter from 'events';
-import Connection from '../connection/Connection';
-import { formatHelpString } from '../Util';
+import { me } from '../data/user';
+import { formatHelpString } from '../utils';
 
 const helpCommands = [
   ['clear', 'Clear the terminal'],
@@ -10,17 +10,12 @@ const helpCommands = [
   ['logout', 'Logout'],
   ['cheat', 'Set a resource [resource, amount]'],
   ['chat', 'Send a chat message to the general-chat [message]'],
-  ['inventory, inv', 'View your inventory'],
-  ['game/host, gh', 'Host a game with default settings'],
-  ['game/join, gj', 'Join a game [gameId]'],
-  ['send', 'Send a custom event and payload to the backend [event, payload]']
+  ['inventory, inv', 'View your inventory']
 ];
 
 export enum TerminalEventType {
   LOG = 'log',
-  COMMAND = 'command',
-  SHOW = 'show',
-  HIDE = 'hide'
+  COMMAND = 'command'
 }
 
 export default class Terminal extends EventEmitter {
@@ -34,14 +29,6 @@ export default class Terminal extends EventEmitter {
 
   public static get instance() {
     return this._instance || (this._instance = new this());
-  }
-
-  public static show() {
-    Terminal.instance.emit(TerminalEventType.SHOW);
-  }
-
-  public static hide() {
-    Terminal.instance.emit(TerminalEventType.HIDE);
   }
 
   public static log(...args: any[]): void {
@@ -63,10 +50,7 @@ export default class Terminal extends EventEmitter {
         return;
       case 'inventory':
       case 'inv':
-        Terminal.log(
-          `🗃️ Inventory (${Connection.instance.me?.inventory?.length})`,
-          Connection.instance.me?.inventory
-        );
+        Terminal.log(`🗃️ Inventory (${me.inventory?.length})`, me.inventory);
         return;
       case 'help':
         Terminal.log(

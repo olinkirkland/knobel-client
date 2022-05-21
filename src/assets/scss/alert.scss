@@ -1,0 +1,27 @@
+@import "colors";
+
+div.alert {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  padding: 1rem 1rem;
+  border-radius: 5px;
+
+  img {
+    width: 5rem;
+  }
+
+  &.warn {
+    color: $warn;
+    background-color: $warn-muted;
+  }
+  &.error {
+    color: $error;
+    background-color: $error-muted;
+  }
+
+  button {
+    margin-left: auto;
+  }
+}

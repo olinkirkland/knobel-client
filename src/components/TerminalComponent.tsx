@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Terminal, {
   TerminalEventType,
   TerminalLog
-} from '../controllers/Terminal';
+} from '../controllers/terminal';
 
 export default function TerminalComponent() {
   let initialized = useRef(false);
@@ -17,7 +17,7 @@ export default function TerminalComponent() {
     if (initialized.current) return;
 
     // Initialize terminal
-    Terminal.instance.on(TerminalEventType.LOG, (log) => {
+    Terminal.instance.on(TerminalEventType.LOG, () => {
       setLogs([...Terminal.logs]);
     });
   }, []);
@@ -52,10 +52,6 @@ export default function TerminalComponent() {
       </ul>
       <div className="terminal-controls">
         <div className="h-group spread center">
-          <button className="link" onClick={() => Terminal.hide()}>
-            <span>Close Terminal</span>
-            <i className="fas fa-times"></i>
-          </button>
           <button className="link" onClick={Terminal.clear}>
             <span>Clear</span>
             <i className="fas fa-eraser"></i>

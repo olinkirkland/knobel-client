@@ -1,0 +1,30 @@
+@import "colors";
+
+.platform {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.taskbar {
+  height: 6rem;
+  background-color: $panel;
+
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+nav {
+}
+
+footer {
+}
+
+.screen {
+  background-color: transparent;
+  flex: 1;
+  overflow-y: auto;
+}

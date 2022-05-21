@@ -1,9 +1,10 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { PopupProps } from 'react-popup-manager';
-import Connection from '../../connection/Connection';
+import Connection from '../../controllers/connection';
+import { me } from '../../data/user';
 import { rootElement } from '../../index';
-import { validateEmail, validatePassword } from '../../Util';
+import { validateEmail, validatePassword } from '../../utils';
 
 type State = {
   email: string;
@@ -55,7 +56,6 @@ export class PopupRegister extends React.Component<PopupRegisterProps> {
 
   render() {
     const { isOpen, onClose } = this.props;
-    const me = Connection.instance.me;
     return (
       <Modal isOpen={isOpen!} appElement={rootElement!} className="modal">
         <div className="popup">

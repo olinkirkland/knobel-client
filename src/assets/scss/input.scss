@@ -1,0 +1,38 @@
+@import "colors";
+
+div.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  color: $text-muted;
+}
+
+input[type="text"],
+input[type="password"] {
+  user-select: auto;
+  font-family: "Outfit", serif;
+  height: 3.2rem;
+  padding: 2rem 1.6rem;
+  border: 1px solid $dark;
+  border-radius: 10px;
+  background-color: white;
+  transition: all 0.3s;
+  color: $text;
+
+  &::placeholder {
+    opacity: 1;
+    color: $darker;
+  }
+
+  &:hover {
+    border-bottom: 1px solid $dark;
+  }
+
+  &:focus {
+    border-bottom: 1px solid $darker;
+  }
+
+  &:focus::placeholder {
+    color: transparent;
+  }
+}
