@@ -2,7 +2,7 @@ import axios from 'axios';
 import EventEmitter from 'events';
 import { PopupError } from '../components/popups/PopupError';
 import { PopupLoading } from '../components/popups/PopupLoading';
-import { me, myUserId } from '../data/user';
+import { myUserId } from '../data/user';
 import PopupMediator from './popupMediator';
 import Terminal, { TerminalEventType } from './terminal';
 
@@ -13,12 +13,17 @@ export const DEV_MODE: boolean = location.hostname === 'localhost';
 export const SERVER_URL: string = 'http://localhost:3000/';
 export const AUTH_URL: string = 'http://localhost:3001/';
 
+export enum ConnectionEventType {
+  LOGGED_IN = 'loggedIn',
+  LOGGED_OUT = 'loggedOut'
+}
+
 export default class Connection extends EventEmitter {
   private static _instance: Connection;
 
   // Token
-  refreshToken?: string;
-  token?: string;
+  private _refreshToken?: string;
+  private accessToken?: string;
 
   private constructor() {
     super();
@@ -32,27 +37,44 @@ export default class Connection extends EventEmitter {
     return this._instance || (this._instance = new this());
   }
 
+  private set refreshToken(value: string) {
+    this._refreshToken = value;
+    this.fetchAccessToken().then(() => {
+      this.emit(ConnectionEventType.LOGGED_IN);
+    });
+  }
+
+  private get refreshToken(): string {
+    return this._refreshToken!;
+  }
+
   public start() {
     // Check if there is a refresh token in local storage
-    this.refreshToken = localStorage.getItem('refresh-token')!;
-    if (this.refreshToken) {
+    // Either login as guest or load the refresh token
+    const storedRefreshToken = localStorage.getItem('refresh-token');
+    if (storedRefreshToken) {
       Terminal.log('🔑', 'Refresh token found in local storage');
+      this.refreshToken = storedRefreshToken;
     } else {
+      Terminal.log('🔑', 'No refresh token found in local storage');
+      this.login(null, null);
     }
   }
 
-  public login(
-    email: string | null,
-    password: string | null,
-    staySignedIn: boolean = false
-  ) {
-    PopupMediator.open(PopupLoading);
+  async fetchAccessToken() {
+    Terminal.log('🔑', 'Fetching access token', '...');
+    await axios
+      .post(AUTH_URL + 'token', { refreshToken: this.refreshToken })
+      .then((res) => {
+        Terminal.log('✔️ Access token fetched');
+      })
+      .catch((err) => {
+        Terminal.log('❌', `${err.code}: ${err.message}`);
+      });
+  }
 
-    if ((email || password) && !(email && password))
-      return Terminal.log(
-        '⚠️',
-        'Both an email and a password are required to login'
-      );
+  public login(email: string | null, password: string | null) {
+    PopupMediator.open(PopupLoading);
 
     Terminal.log(
       '🔑',
@@ -68,8 +90,6 @@ export default class Connection extends EventEmitter {
       )
       .then((res) => {
         const userId = res.data.id;
-        this.refreshToken = res.data.refreshToken;
-        this.token = res.data.token;
 
         if (!userId) {
           PopupMediator.open(PopupError, {
@@ -82,11 +102,12 @@ export default class Connection extends EventEmitter {
 
         Terminal.log('✔️ Logged in as', userId);
 
-        if (staySignedIn && email && password) {
-          // Save the refresh token to local storage
-          localStorage.setItem('refresh-token', this.refreshToken!);
-          Terminal.log('🔑', 'Refresh token saved to local storage');
-        }
+        this.refreshToken = res.data.refreshToken;
+        this.accessToken = res.data.token;
+
+        // Save the refresh token to local storage
+        localStorage.setItem('refresh-token', this.refreshToken!);
+        PopupMediator.close();
       })
       .catch((err) => {
         console.log(err.response);
@@ -100,15 +121,22 @@ export default class Connection extends EventEmitter {
       });
   }
 
-  // public logout() {
-  //   this.disconnect();
+  public logout() {
+    // Clear stored refresh token
+    localStorage.removeItem('refresh-token');
 
-  //   // Clear stored login credentials
-  //   localStorage.removeItem('login');
+    axios
+      .post(AUTH_URL + 'logout', {
+        refreshToken: this.refreshToken
+      })
+      .then((res) => {
+        Terminal.log('✔️ Logged out');
+        this.emit(ConnectionEventType.LOGGED_OUT);
+      });
 
-  //   // Reload the page
-  //   window.location.reload();
-  // }
+    // Reload the page
+    window.location.reload();
+  }
 
   public register(email: string, password: string) {
     PopupMediator.open(PopupLoading);
@@ -124,15 +152,11 @@ export default class Connection extends EventEmitter {
         Terminal.log('✔️ Registered');
 
         localStorage.setItem(
-          'login',
-          JSON.stringify({
-            email: email,
-            password: password
-          })
+          'refresh-token',
+          JSON.stringify(this.refreshToken)
         );
 
         Terminal.log('🔑', 'Login credentials saved to local storage');
-
         PopupMediator.close();
       })
       .catch((err) => {
@@ -154,6 +178,12 @@ export default class Connection extends EventEmitter {
       switch (cmd) {
         case 'register':
           this.register(arr[0], arr[1]);
+          break;
+        case 'login':
+          this.login(arr[0], arr[1]);
+          break;
+        case 'logout':
+          this.logout();
           break;
       }
     });

@@ -8,7 +8,6 @@ import Checkbox from '../Checkbox';
 type State = {
   email: string;
   password: string;
-  staySignedIn: boolean;
   validationMessage: string | null;
 };
 
@@ -18,7 +17,6 @@ export class PopupLogin extends React.Component<PopupLoginProps> {
   public readonly state: State = {
     email: '',
     password: '',
-    staySignedIn: true,
     validationMessage: null
   };
 
@@ -34,11 +32,7 @@ export class PopupLogin extends React.Component<PopupLoginProps> {
     }
 
     // Login
-    Connection.instance.login(
-      this.state.email,
-      this.state.password,
-      this.state.staySignedIn
-    );
+    Connection.instance.login(this.state.email, this.state.password);
     onClose!();
   }
 
@@ -84,17 +78,6 @@ export class PopupLogin extends React.Component<PopupLoginProps> {
                 }}
               />
             </div>
-            <hgroup>
-              <Checkbox
-                text="Stay signed in"
-                value={true}
-                checked={(value: boolean) => {
-                  this.setState((state, props) => ({
-                    staySignedIn: value
-                  }));
-                }}
-              />
-            </hgroup>
             {this.state.validationMessage && (
               <div className="alert error">
                 {this.state.validationMessage}
