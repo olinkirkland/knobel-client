@@ -13,21 +13,32 @@ export const DEV_MODE: boolean = location.hostname === 'localhost';
 export const SERVER_URL: string = 'http://localhost:3000/';
 export const AUTH_URL: string = 'http://localhost:3001/';
 
-// Token
-let REFRESH_TOKEN: string;
-let TOKEN_KEY: string;
-
 export default class Connection extends EventEmitter {
   private static _instance: Connection;
+
+  // Token
+  refreshToken?: string;
+  token?: string;
 
   private constructor() {
     super();
 
     this.addTerminalListeners();
+
+    this.start();
   }
 
   public static get instance() {
     return this._instance || (this._instance = new this());
+  }
+
+  public start() {
+    // Check if there is a refresh token in local storage
+    this.refreshToken = localStorage.getItem('refresh-token')!;
+    if (this.refreshToken) {
+      Terminal.log('🔑', 'Refresh token found in local storage');
+    } else {
+    }
   }
 
   public login(
@@ -56,13 +67,16 @@ export default class Connection extends EventEmitter {
         email && password ? { email: email, password: password } : null
       )
       .then((res) => {
-        const userId = res.data;
+        const userId = res.data.id;
+        this.refreshToken = res.data.refreshToken;
+        this.token = res.data.token;
+
         if (!userId) {
           PopupMediator.open(PopupError, {
             title: 'Login failed',
             message: 'Could not login with the provided credentials.'
           });
-          localStorage.removeItem('login');
+          localStorage.removeItem('refresh-token');
           return;
         }
 
@@ -70,14 +84,13 @@ export default class Connection extends EventEmitter {
 
         if (staySignedIn && email && password) {
           // Save the refresh token to local storage
-          // TODO
-          localStorage.setItem('token', JSON.stringify({}));
-          Terminal.log('🔑', 'Login credentials saved to local storage');
+          localStorage.setItem('refresh-token', this.refreshToken!);
+          Terminal.log('🔑', 'Refresh token saved to local storage');
         }
       })
       .catch((err) => {
         console.log(err.response);
-        localStorage.removeItem('login');
+        localStorage.removeItem('refresh-token');
         PopupMediator.open(PopupError, {
           title: 'Login failed',
           message: `${err.code}: ${err.message}`

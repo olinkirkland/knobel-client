@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { usePopupManager } from 'react-popup-manager';
 import { OpenPopupOptions } from 'react-popup-manager/dist/src/__internal__/popupManagerInternal';
 import Platform from './components/platform/Platform';
-import { PopupTerminal } from './components/popups/PopupTerminal';
 import Connection from './controllers/connection';
 import PopupMediator, {
   PopupMediatorEventType
