@@ -1,4 +1,4 @@
-@import 'colors';
+@import "colors";
 
 .checkbox {
   cursor: pointer;
@@ -19,7 +19,10 @@
     color: white;
     border-radius: 3px;
     background-color: $dark;
-    font-size: 1rem;
+
+    i {
+      font-size: 1.2rem;
+    }
   }
 
   .icon-frame.checked {

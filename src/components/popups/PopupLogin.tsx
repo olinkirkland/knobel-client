@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { PopupProps } from 'react-popup-manager';
+import Connection from '../../controllers/connection';
 import { rootElement } from '../../index';
 import Checkbox from '../Checkbox';
 
@@ -33,11 +34,11 @@ export class PopupLogin extends React.Component<PopupLoginProps> {
     }
 
     // Login
-    // Connection.instance.login(
-    //   this.state.email,
-    //   this.state.password,
-    //   this.state.staySignedIn
-    // );
+    Connection.instance.login(
+      this.state.email,
+      this.state.password,
+      this.state.staySignedIn
+    );
     onClose!();
   }
 
@@ -49,7 +50,7 @@ export class PopupLogin extends React.Component<PopupLoginProps> {
         <div className="popup">
           <div className="popup-header">
             <span>Login</span>
-            <button className="button-close" onClick={onClose}>
+            <button className="btn-link btn-close" onClick={onClose}>
               <i className="fas fa-times" />
             </button>
           </div>
@@ -98,7 +99,7 @@ export class PopupLogin extends React.Component<PopupLoginProps> {
               <div className="alert error">
                 {this.state.validationMessage}
                 <button
-                  className="button-close"
+                  className="btn-link btn-close"
                   onClick={() => {
                     this.setState((state, props) => ({
                       validationMessage: null
@@ -111,10 +112,10 @@ export class PopupLogin extends React.Component<PopupLoginProps> {
             )}
           </div>
           <div className="popup-taskbar">
-            <button>
+            <button className="btn">
               <span>Forgot password?</span>
             </button>
-            <button onClick={this.validateAndLogin.bind(this)}>
+            <button className="btn" onClick={this.validateAndLogin.bind(this)}>
               <i className="fas fa-sign-in-alt" />
               <span>Login</span>
             </button>

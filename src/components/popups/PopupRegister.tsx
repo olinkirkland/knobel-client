@@ -61,7 +61,7 @@ export class PopupRegister extends React.Component<PopupRegisterProps> {
         <div className="popup">
           <div className="popup-header">
             <span>Create Account</span>
-            <button className="button-close" onClick={onClose}>
+            <button className="btn-link btn-close" onClick={onClose}>
               <i className="fas fa-times" />
             </button>
           </div>
@@ -117,7 +117,7 @@ export class PopupRegister extends React.Component<PopupRegisterProps> {
               <div className="alert error">
                 {this.state.validationMessage}
                 <button
-                  className="button-close"
+                  className="btn-link btn-close"
                   onClick={() => {
                     this.setState((state, props) => ({
                       validationMessage: null
@@ -135,7 +135,10 @@ export class PopupRegister extends React.Component<PopupRegisterProps> {
             </div>
           </div>
           <div className="popup-taskbar">
-            <button onClick={this.validateAndRegister.bind(this)}>
+            <button
+              className="btn"
+              onClick={this.validateAndRegister.bind(this)}
+            >
               Create Account
             </button>
           </div>

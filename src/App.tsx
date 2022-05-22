@@ -17,7 +17,6 @@ export default function App() {
     const popupMediator = PopupMediator.instance;
     popupMediator.on(PopupMediatorEventType.OPEN, openPopup);
     popupMediator.on(PopupMediatorEventType.CLOSE, popupManager.closeAll);
-    popupManager.open(PopupTerminal);
 
     // Establish a connection
     const connection = Connection.instance;

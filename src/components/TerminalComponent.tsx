@@ -9,6 +9,10 @@ export default function TerminalComponent() {
 
   const [logs, setLogs] = useState<TerminalLog[]>([]);
 
+  function onTerminalLog() {
+    setLogs([...Terminal.logs]);
+  }
+
   useEffect(() => {
     const input: HTMLInputElement = document.querySelector('.terminal-input')!;
     input.focus();
@@ -16,10 +20,10 @@ export default function TerminalComponent() {
 
     if (initialized.current) return;
 
-    // Initialize terminal
-    Terminal.instance.on(TerminalEventType.LOG, () => {
-      setLogs([...Terminal.logs]);
-    });
+    Terminal.instance.on(TerminalEventType.LOG, onTerminalLog);
+    return () => {
+      Terminal.instance.off(TerminalEventType.LOG, onTerminalLog);
+    };
   }, []);
 
   useEffect(() => {
@@ -52,12 +56,12 @@ export default function TerminalComponent() {
       </ul>
       <div className="terminal-controls">
         <div className="h-group spread center">
-          <button className="link" onClick={Terminal.clear}>
+          <button className="btn-link" onClick={Terminal.clear}>
             <span>Clear</span>
             <i className="fas fa-eraser"></i>
           </button>
           <button
-            className="link"
+            className="btn-link"
             onClick={() => {
               Terminal.command('help');
             }}
@@ -73,7 +77,7 @@ export default function TerminalComponent() {
               if (e.key === 'Enter') applyCommand();
             }}
           />
-          <button className="link" onClick={applyCommand}>
+          <button className="btn-link" onClick={applyCommand}>
             <span>Send</span>
             <i className="fas fa-paper-plane"></i>
           </button>

@@ -30,73 +30,62 @@ export default class Connection extends EventEmitter {
     return this._instance || (this._instance = new this());
   }
 
-  private error(title: string, message: string) {
-    Terminal.log('❌', title);
-    PopupMediator.open(PopupError, {
-      title: title,
-      message: message
-    });
+  public login(
+    email: string | null,
+    password: string | null,
+    staySignedIn: boolean = false
+  ) {
+    PopupMediator.open(PopupLoading);
+
+    if ((email || password) && !(email && password))
+      return Terminal.log(
+        '⚠️',
+        'Both an email and a password are required to login'
+      );
+
+    Terminal.log(
+      '🔑',
+      'Logging in',
+      email && password ? `${email} / ${password}` : 'anonymously',
+      '...'
+    );
+
+    axios
+      .post(
+        AUTH_URL + 'login',
+        email && password ? { email: email, password: password } : null
+      )
+      .then((res) => {
+        const userId = res.data;
+        if (!userId) {
+          PopupMediator.open(PopupError, {
+            title: 'Login failed',
+            message: 'Could not login with the provided credentials.'
+          });
+          localStorage.removeItem('login');
+          return;
+        }
+
+        Terminal.log('✔️ Logged in as', userId);
+
+        if (staySignedIn && email && password) {
+          // Save the refresh token to local storage
+          // TODO
+          localStorage.setItem('token', JSON.stringify({}));
+          Terminal.log('🔑', 'Login credentials saved to local storage');
+        }
+      })
+      .catch((err) => {
+        console.log(err.response);
+        localStorage.removeItem('login');
+        PopupMediator.open(PopupError, {
+          title: 'Login failed',
+          message: `${err.code}: ${err.message}`
+        });
+
+        return;
+      });
   }
-
-  // public login(
-  //   email: string | null,
-  //   password: string | null,
-  //   staySignedIn: boolean = false
-  // ) {
-  //   PopupMediator.open(PopupLoading);
-
-  //   if ((email || password) && !(email && password))
-  //     return Terminal.log(
-  //       '⚠️',
-  //       'Both an email and a password are required to login'
-  //     );
-
-  //   Terminal.log(
-  //     '🔑',
-  //     'Logging in',
-  //     email && password ? `${email} / ${password}` : 'anonymously',
-  //     '...'
-  //   );
-
-  //   axios
-  //     .post(
-  //       SERVER_URL + 'login',
-  //       email && password
-  //         ? { email: email, password: password }
-  //     )
-  //     .then((res) => {
-  //       const userId = res.data;
-  //       if (!userId) {
-  //         this.error('Login failed', 'Invalid username or password.');
-  //         localStorage.removeItem('login');
-  //         return;
-  //       }
-
-  //       Terminal.log('✔️ Logged in as', userId);
-
-  //       // TODO
-  //       if (staySignedIn && email && password) {
-  //         // Save the refresh token to local storage
-  //         localStorage.setItem('token', JSON.stringify({}));
-
-  //         Terminal.log('🔑', 'Login credentials saved to local storage');
-  //       }
-
-  //       this.me = new PersonalUserData();
-  //       this.me.id = userId;
-
-  //       this.connect();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.response);
-  //       if (err.response.status === 401 || err.response.status === 400) {
-  //         this.error('Login failed', 'Invalid username or password.');
-  //         localStorage.removeItem('login');
-  //       } else this.error('Login failed', `${err.code}: ${err.message}`);
-
-  //       return;
-  //     });
-  // }
 
   // public logout() {
   //   this.disconnect();
@@ -113,13 +102,12 @@ export default class Connection extends EventEmitter {
 
     Terminal.log('🔑', `Registering ${email} / ${password}`, '...');
     axios
-      .post(SERVER_URL + 'users/registration', {
+      .post(AUTH_URL + 'register', {
         email: email,
         password: password,
         userID: myUserId
       })
       .then((res) => {
-        Terminal.log('👀', res);
         Terminal.log('✔️ Registered');
 
         localStorage.setItem(
@@ -135,11 +123,11 @@ export default class Connection extends EventEmitter {
         PopupMediator.close();
       })
       .catch((err) => {
-        Terminal.log(err);
-        this.error(
-          'Registration failed',
-          'Could not register an account with the provided email and password.'
-        );
+        PopupMediator.open(PopupError, {
+          title: 'Registration failed',
+          message: `${err.code}: ${err.message}`
+        });
+
         return;
       });
   }
