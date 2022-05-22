@@ -3,7 +3,6 @@ import Modal from 'react-modal';
 import { PopupProps } from 'react-popup-manager';
 import Connection from '../../controllers/connection';
 import { rootElement } from '../../index';
-import Checkbox from '../Checkbox';
 
 type State = {
   email: string;

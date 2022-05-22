@@ -2,7 +2,7 @@ import axios from 'axios';
 import EventEmitter from 'events';
 import { PopupError } from '../components/popups/PopupError';
 import { PopupLoading } from '../components/popups/PopupLoading';
-import { myUserId } from '../data/user';
+import { me } from '../data/user';
 import PopupMediator from './popupMediator';
 import Terminal, { TerminalEventType } from './terminal';
 
@@ -14,16 +14,15 @@ export const SERVER_URL: string = 'http://localhost:3000/';
 export const AUTH_URL: string = 'http://localhost:3001/';
 
 export enum ConnectionEventType {
-  LOGGED_IN = 'loggedIn',
-  LOGGED_OUT = 'loggedOut'
+  ACCESS_TOKEN_CHANGED = 'accessTokenChanged'
 }
 
 export default class Connection extends EventEmitter {
   private static _instance: Connection;
 
   // Token
-  private _refreshToken?: string;
-  private accessToken?: string;
+  public refreshToken?: string;
+  public accessToken?: string;
 
   private constructor() {
     super();
@@ -37,17 +36,6 @@ export default class Connection extends EventEmitter {
     return this._instance || (this._instance = new this());
   }
 
-  private set refreshToken(value: string) {
-    this._refreshToken = value;
-    this.fetchAccessToken().then(() => {
-      this.emit(ConnectionEventType.LOGGED_IN);
-    });
-  }
-
-  private get refreshToken(): string {
-    return this._refreshToken!;
-  }
-
   public start() {
     // Check if there is a refresh token in local storage
     // Either login as guest or load the refresh token
@@ -55,6 +43,7 @@ export default class Connection extends EventEmitter {
     if (storedRefreshToken) {
       Terminal.log('🔑', 'Refresh token found in local storage');
       this.refreshToken = storedRefreshToken;
+      this.fetchAccessToken();
     } else {
       Terminal.log('🔑', 'No refresh token found in local storage');
       this.login(null, null);
@@ -67,6 +56,9 @@ export default class Connection extends EventEmitter {
       .post(AUTH_URL + 'token', { refreshToken: this.refreshToken })
       .then((res) => {
         Terminal.log('✔️ Access token fetched');
+        this.accessToken = res.data.accessToken;
+        me.id = res.data.id;
+        this.emit(ConnectionEventType.ACCESS_TOKEN_CHANGED);
       })
       .catch((err) => {
         Terminal.log('❌', `${err.code}: ${err.message}`);
@@ -103,7 +95,9 @@ export default class Connection extends EventEmitter {
         Terminal.log('✔️ Logged in as', userId);
 
         this.refreshToken = res.data.refreshToken;
-        this.accessToken = res.data.token;
+        this.accessToken = res.data.accessToken;
+        Object.assign(me, { id: userId });
+        this.emit(ConnectionEventType.ACCESS_TOKEN_CHANGED);
 
         // Save the refresh token to local storage
         localStorage.setItem('refresh-token', this.refreshToken!);
@@ -131,7 +125,6 @@ export default class Connection extends EventEmitter {
       })
       .then((res) => {
         Terminal.log('✔️ Logged out');
-        this.emit(ConnectionEventType.LOGGED_OUT);
       });
 
     // Reload the page
@@ -145,8 +138,7 @@ export default class Connection extends EventEmitter {
     axios
       .post(AUTH_URL + 'register', {
         email: email,
-        password: password,
-        userID: myUserId
+        password: password
       })
       .then((res) => {
         Terminal.log('✔️ Registered');
