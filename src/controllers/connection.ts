@@ -14,7 +14,8 @@ export const SERVER_URL: string = 'http://localhost:3000/';
 export const AUTH_URL: string = 'http://localhost:3001/';
 
 export enum ConnectionEventType {
-  ACCESS_TOKEN_CHANGED = 'accessTokenChanged'
+  ACCESS_TOKEN_CHANGED = 'accessTokenChanged',
+  USER_DATA_CHANGED = 'userDataChanged'
 }
 
 export default class Connection extends EventEmitter {
@@ -28,7 +29,7 @@ export default class Connection extends EventEmitter {
     super();
 
     this.addTerminalListeners();
-
+    this.addInterceptors();
     this.start();
   }
 
@@ -36,14 +37,35 @@ export default class Connection extends EventEmitter {
     return this._instance || (this._instance = new this());
   }
 
-  public start() {
+  private addInterceptors() {
+    axios.interceptors.response.use(
+      (res) => {
+        return res;
+      },
+      async (error) => {
+        if (error.response) {
+          if (error.response.status === 403) {
+            Terminal.log('🔑', 'Access token rejected');
+            await this.fetchAccessToken();
+            const config = error.config;
+            config.headers['Authorization'] = `Bearer ${this.accessToken}`;
+            return axios(config);
+          }
+        }
+        return Promise.reject(error);
+      }
+    );
+  }
+
+  async start() {
     // Check if there is a refresh token in local storage
     // Either login as guest or load the refresh token
     const storedRefreshToken = localStorage.getItem('refresh-token');
     if (storedRefreshToken) {
       Terminal.log('🔑', 'Refresh token found in local storage');
       this.refreshToken = storedRefreshToken;
-      this.fetchAccessToken();
+      me.id = await this.fetchAccessToken();
+      this.fetchMyUserData();
     } else {
       Terminal.log('🔑', 'No refresh token found in local storage');
       this.login(null, null);
@@ -51,18 +73,39 @@ export default class Connection extends EventEmitter {
   }
 
   async fetchAccessToken() {
-    Terminal.log('🔑', 'Fetching access token', '...');
-    await axios
-      .post(AUTH_URL + 'token', { refreshToken: this.refreshToken })
-      .then((res) => {
-        Terminal.log('✔️ Access token fetched');
-        this.accessToken = res.data.accessToken;
-        me.id = res.data.id;
-        this.emit(ConnectionEventType.ACCESS_TOKEN_CHANGED);
-      })
-      .catch((err) => {
-        Terminal.log('❌', `${err.code}: ${err.message}`);
+    Terminal.log('🔑', 'Fetching new access token', '...');
+    try {
+      const res = await axios.post(AUTH_URL + 'token', {
+        refreshToken: this.refreshToken
       });
+      Terminal.log('✔️ Access token fetched');
+      this.accessToken = res.data.accessToken;
+      this.emit(ConnectionEventType.ACCESS_TOKEN_CHANGED);
+      return res.data.id; // Returns user id
+    } catch (err) {
+      Terminal.log('❌', `${err}`);
+      this.logout();
+      PopupMediator.open(PopupError, {
+        title: 'Invalid token',
+        message: 'Logging out ...'
+      });
+    }
+  }
+
+  async fetchMyUserData() {
+    Terminal.log('👤', 'Fetching user data', '...');
+    try {
+      const res = await axios.get(SERVER_URL + 'me', {
+        headers: {
+          Authorization: `Bearer ${this.accessToken}`
+        }
+      });
+      Terminal.log('✔️ User data fetched');
+      Object.assign(me, res.data);
+      this.emit(ConnectionEventType.USER_DATA_CHANGED);
+    } catch (err) {
+      Terminal.log('❌', `${err}`);
+    }
   }
 
   public login(email: string | null, password: string | null) {
@@ -81,9 +124,7 @@ export default class Connection extends EventEmitter {
         email && password ? { email: email, password: password } : null
       )
       .then((res) => {
-        const userId = res.data.id;
-
-        if (!userId) {
+        if (!res.data.id) {
           PopupMediator.open(PopupError, {
             title: 'Login failed',
             message: 'Could not login with the provided credentials.'
@@ -92,11 +133,12 @@ export default class Connection extends EventEmitter {
           return;
         }
 
-        Terminal.log('✔️ Logged in as', userId);
+        me.id = res.data.id;
+        Terminal.log('✔️ Logged in as', me.id);
 
         this.refreshToken = res.data.refreshToken;
         this.accessToken = res.data.accessToken;
-        Object.assign(me, { id: userId });
+        this.fetchMyUserData();
         this.emit(ConnectionEventType.ACCESS_TOKEN_CHANGED);
 
         // Save the refresh token to local storage
@@ -125,10 +167,10 @@ export default class Connection extends EventEmitter {
       })
       .then((res) => {
         Terminal.log('✔️ Logged out');
-      });
 
-    // Reload the page
-    window.location.reload();
+        // Reload the page
+        window.location.reload();
+      });
   }
 
   public register(email: string, password: string) {

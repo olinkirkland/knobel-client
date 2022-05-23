@@ -7,8 +7,8 @@ export enum OnlineStatus {
 
 export class User {
   id?: string;
-  isGuest?: boolean;
-  username?: string;
+  isRegistered?: boolean;
+  name?: string;
   currentAvatar?: string;
   level?: number;
   status?: OnlineStatus.ONLINE | OnlineStatus.OFFLINE;
@@ -16,7 +16,6 @@ export class User {
 
 export class Me extends User {
   email?: string;
-  currentSkin?: string;
   currentWallpaper?: string;
   gold?: number;
   experience?: number;
