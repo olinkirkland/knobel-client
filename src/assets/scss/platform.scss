@@ -29,8 +29,41 @@ nav {
 footer {
 }
 
-.screen {
+button.btn-user {
+  margin: 1rem;
+  padding: 0 1.2rem;
+  background-color: #00000010;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #00000020;
+  }
+
+  &:active {
+    background-color: #00000030;
+  }
+}
+
+div.user-tile {
+  color: $text-muted;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.badge {
+  color: white;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  padding: 0.2rem 0.4rem;
+  border-radius: 5px;
+  background-color: #00000030;
+}
+
+.page {
   background-color: transparent;
   flex: 1;
   overflow-y: auto;
+  color: white;
 }

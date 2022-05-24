@@ -29,12 +29,16 @@ export class PopupPrompt extends React.Component<PopupPromptProps> {
         <div className="popup">
           <div className="popup-header">
             <span>{title}</span>
+            <button className="btn-link btn-close" onClick={onClose}>
+              <i className="fas fa-times"></i>
+            </button>
           </div>
           <div className="popup-content">
             <p>{message}</p>
           </div>
           <div className="popup-taskbar">
             <button
+              className="btn"
               onClick={() => {
                 onCancel!();
                 onClose!();
@@ -43,6 +47,7 @@ export class PopupPrompt extends React.Component<PopupPromptProps> {
               {cancel}
             </button>
             <button
+              className="btn"
               onClick={() => {
                 onConfirm!();
                 onClose!();
