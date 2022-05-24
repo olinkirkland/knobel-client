@@ -10,6 +10,9 @@ export default function Footer() {
   const [name, setName] = useState('');
 
   useEffect(() => {
+    onTokenChange();
+    onUserDataChange();
+
     Connection.instance.addListener(
       ConnectionEventType.ACCESS_TOKEN_CHANGED,
       onTokenChange

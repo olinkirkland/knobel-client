@@ -27,7 +27,9 @@ export default class Connection extends EventEmitter {
 
   private constructor() {
     super();
+  }
 
+  public initialize() {
     this.addTerminalListeners();
     this.addInterceptors();
     this.start();
@@ -38,6 +40,14 @@ export default class Connection extends EventEmitter {
   }
 
   private addInterceptors() {
+    axios.interceptors.request.use((config) => {
+      if (!this.accessToken) return config;
+      if (!config) config = {};
+
+      config!.headers!.Authorization = `Bearer ${this.accessToken}`;
+      return config;
+    });
+
     axios.interceptors.response.use(
       (res) => {
         return res;
@@ -65,7 +75,8 @@ export default class Connection extends EventEmitter {
       Terminal.log('🔑', 'Refresh token found in local storage');
       this.refreshToken = storedRefreshToken;
       me.id = await this.fetchAccessToken();
-      this.fetchMyUserData();
+      await this.fetchMyUserData();
+      PopupMediator.close();
     } else {
       Terminal.log('🔑', 'No refresh token found in local storage');
       this.login(null, null);
@@ -95,11 +106,7 @@ export default class Connection extends EventEmitter {
   async fetchMyUserData() {
     Terminal.log('👤', 'Fetching user data', '...');
     try {
-      const res = await axios.get(SERVER_URL + 'me', {
-        headers: {
-          Authorization: `Bearer ${this.accessToken}`
-        }
-      });
+      const res = await axios.get(SERVER_URL + 'me');
       Terminal.log('✔️ User data fetched');
       Object.assign(me, res.data);
       this.emit(ConnectionEventType.USER_DATA_CHANGED);
@@ -146,11 +153,10 @@ export default class Connection extends EventEmitter {
         PopupMediator.close();
       })
       .catch((err) => {
-        console.log(err.response);
         localStorage.removeItem('refresh-token');
         PopupMediator.open(PopupError, {
           title: 'Login failed',
-          message: `${err.code}: ${err.message}`
+          message: err.response.data
         });
 
         return;
@@ -196,7 +202,7 @@ export default class Connection extends EventEmitter {
       .catch((err) => {
         PopupMediator.open(PopupError, {
           title: 'Registration failed',
-          message: `${err.code}: ${err.message}`
+          message: err.response.data
         });
 
         return;

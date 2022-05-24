@@ -3,13 +3,19 @@ import Modal from 'react-modal';
 import { PopupProps } from 'react-popup-manager';
 import { rootElement } from '../../index';
 
-interface PopupLoadingProps extends PopupProps {}
+interface PopupLoadingProps extends PopupProps {
+  isOpaque: boolean;
+}
 
 export class PopupLoading extends React.Component<PopupLoadingProps> {
   render() {
-    const { isOpen } = this.props;
+    const { isOpen, isOpaque } = this.props;
     return (
-      <Modal isOpen={isOpen!} appElement={rootElement!} className="modal">
+      <Modal
+        isOpen={isOpen!}
+        appElement={rootElement!}
+        className={`modal ${isOpaque && 'opaque'}`}
+      >
         <div className="popup popup-fit">
           <div className="popup-header popup-loading">
             <span>Loading ...</span>
