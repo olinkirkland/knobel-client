@@ -18,6 +18,8 @@ import './assets/css/terminal.css';
 
 // Media Queries
 import './assets/css/platform-queries.css';
+import './assets/css/home-page-queries.css';
+import './assets/css/popups-queries.css';
 
 export const rootElement = document.getElementById('root');
 

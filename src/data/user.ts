@@ -16,7 +16,8 @@ export class User {
 
 export class Me extends User {
   email?: string;
-  currentWallpaper?: string;
+  avatar?: string;
+  wallpaper?: string;
   gold?: number;
   experience?: number;
   friends?: User[];

@@ -10,10 +10,11 @@ export default function Footer() {
   const [accessToken, setAccessToken] = useState('');
   const [refreshToken, setRefreshToken] = useState('');
 
-  const [gold, setGold] = useState(0);
-  const [level, setLevel] = useState(0);
-  const [experience, setExperience] = useState(0);
+  const [gold, setGold] = useState(me.gold);
+  const [level, setLevel] = useState(me.level);
+  const [experience, setExperience] = useState(me.experience);
   const [experienceToNextLevel, setExperienceToNextLevel] = useState(0);
+  const [percentExperience, setPercentExperience] = useState(0);
   const [unread, setUnread] = useState(0);
 
   useEffect(() => {
@@ -53,27 +54,31 @@ export default function Footer() {
     setGold(me.gold!);
     setLevel(me.level!);
     setExperience(me.experience!);
-    setExperienceToNextLevel(
-      calculateExperienceNeededForNextLevel(me.experience!)
-    );
     // setUnread(me.unread!);
   }
+
+  useEffect(() => {
+    // Update experience to next level and percent for progress bar
+    const experienceNeeded = calculateExperienceNeededForNextLevel(level!);
+    setExperienceToNextLevel(experienceNeeded);
+
+    const percent = Math.min(experience! / experienceNeeded, 1);
+    setPercentExperience(percent);
+  }, [experience, experienceToNextLevel, level]);
 
   return (
     <footer className="taskbar">
       <div className="taskbar-group">
         <button className="btn-taskbar hide-mobile">
           <span>{`Level ${level}`}</span>
-          <ProgressBar
-            percent={Math.min(experience / experienceToNextLevel, 1)}
-          />
+          <ProgressBar percent={percentExperience} />
         </button>
         <button className="btn-taskbar">
           <img className="" src="assets/icons/coin.png" alt="" />
           <span>{`${gold}`}</span>
         </button>
         <button className="btn-taskbar">
-          <img className="" src="assets/icons/chat.png" alt="" />
+          <i className="fas fa-comment-alt" />
           <span className="hide-mobile">Chat Room</span>
         </button>
       </div>

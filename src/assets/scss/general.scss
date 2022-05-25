@@ -33,6 +33,15 @@ img.icon {
   margin: 0 0.4rem 0 0;
 }
 
+pre {
+  user-select: text;
+  color: $text;
+  font-family: "Inconsolata", monospace !important;
+  white-space: pre-wrap;
+  font-size: 1.2rem;
+  line-height: 2rem;
+}
+
 ::selection,
 ::-moz-selection {
   background: $primary-muted;

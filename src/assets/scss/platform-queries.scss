@@ -1,12 +1,12 @@
 @media (max-width: 68em) {
   body {
-    background-color: red;
+    // background-color: red;
   }
 }
 
 @media (max-width: 48em) {
   body {
-    background-color: blue;
+    // background-color: blue;
   }
 
   .show-mobile {
@@ -31,10 +31,11 @@
       width: 100%;
       .btn-taskbar:first-child {
         // Logo button
+        width: 100%;
         margin: 0;
-        padding: 1rem;
+        padding: 0;
+        justify-content: center;
         border-right: none;
-        margin-right: auto;
 
         img.logo {
           margin-top: 1rem;

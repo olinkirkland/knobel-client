@@ -46,14 +46,14 @@ export default function Nav() {
           <i className="fas fa-home" />
         </button>
         <button
-          className="btn-taskbar"
+          className="btn-taskbar hide-mobile"
           onClick={() => {
             PageMediator.open(PageType.GAME);
           }}
         >
           <span>Play Now</span>
         </button>
-        <button className="btn-taskbar">
+        <button className="btn-taskbar hide-mobile">
           <span>Shop</span>
         </button>
         <button

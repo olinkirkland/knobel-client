@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,MAAM,AAAC,CACL,SAAS,CAAE,eAAe,CAC1B,SAAS,CAAE,eAAe,CAC1B,UAAU,CAAE,eAAe,CAC3B,MAAM,CAAE,YAAY,CACrB",
+    "sources": [
+        "../scss/popups-queries.scss"
+    ],
+    "names": [],
+    "file": "popups-queries.css"
+}
