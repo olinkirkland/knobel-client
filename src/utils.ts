@@ -14,7 +14,7 @@ export function numberComma(n: number): string {
   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
-export function experienceNeededFromLevel(level: number): number {
+export function calculateExperienceNeededForNextLevel(level: number): number {
   return Math.round(100 + (level - 1) * 7);
 }
 

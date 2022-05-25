@@ -9,6 +9,7 @@ import { PopupPrompt } from '../popups/PopupPrompt';
 import { PopupRegister } from '../popups/PopupRegister';
 import { PopupTerminal } from '../popups/PopupTerminal';
 import UserTile from '../UserTile';
+import VerticalSeparator from '../VerticalSeparator';
 
 export default function Nav() {
   const [isRegistered, setIsRegistered] = useState(me.isRegistered);
@@ -40,8 +41,9 @@ export default function Nav() {
             PageMediator.open(PageType.HOME);
           }}
         >
-          <i className="fas fa-home"></i>
-          <span>Home</span>
+          <img className="logo" src="assets/images/logo.png" alt="logo" />
+          {/* <span className="logo">Knobel</span> */}
+          <i className="fas fa-home" />
         </button>
         <button
           className="btn-taskbar"
@@ -49,15 +51,13 @@ export default function Nav() {
             PageMediator.open(PageType.GAME);
           }}
         >
-          <i className="fas fa-gamepad"></i>
-          <span>Play</span>
+          <span>Play Now</span>
         </button>
         <button className="btn-taskbar">
-          <i className="fas fa-shopping-cart"></i>
           <span>Shop</span>
         </button>
         <button
-          className="btn-taskbar"
+          className="btn-taskbar hide-mobile"
           onClick={() => {
             PopupMediator.open(PopupTerminal);
           }}
@@ -66,7 +66,7 @@ export default function Nav() {
           <span>Terminal</span>
         </button>
       </div>
-      <div className="taskbar-group">
+      <div className="taskbar-group hide-mobile">
         <button
           className="btn-user"
           onClick={() => {
