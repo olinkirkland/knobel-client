@@ -16,7 +16,7 @@ export class PopupSuccess extends React.Component<PopupSuccessProps> {
         <div className="popup">
           <div className="popup-header popup-success">
             <span>{title}</span>
-            <button className="button-close" onClick={onClose}>
+            <button className="btn-link btn-close" onClick={onClose}>
               <i className="fas fa-times" />
             </button>
           </div>

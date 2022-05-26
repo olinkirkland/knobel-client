@@ -190,14 +190,9 @@ export default class Connection extends EventEmitter {
       })
       .then((res) => {
         Terminal.log('✔️ Registered');
-
-        localStorage.setItem(
-          'refresh-token',
-          JSON.stringify(this.refreshToken)
-        );
-
-        Terminal.log('🔑', 'Login credentials saved to local storage');
-        PopupMediator.close();
+        
+        // Automatically login
+        this.login(email, password);
       })
       .catch((err) => {
         PopupMediator.open(PopupError, {
