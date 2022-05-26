@@ -4,6 +4,7 @@ import PopupMediator from '../../controllers/popupMediator';
 import { me } from '../../data/user';
 import { calculateExperienceNeededForNextLevel } from '../../utils';
 import { PopupMe } from '../popups/PopupMe';
+import { PopupTerminal } from '../popups/PopupTerminal';
 import ProgressBar from '../ProgressBar';
 
 export default function Footer() {
@@ -103,6 +104,14 @@ export default function Footer() {
           }}
         >
           <span>My Profile</span>
+        </button>
+        <button
+          className="btn-taskbar align-right"
+          onClick={() => {
+            PopupMediator.open(PopupTerminal);
+          }}
+        >
+          <i className="fas fa-keyboard"></i>
         </button>
       </div>
     </footer>

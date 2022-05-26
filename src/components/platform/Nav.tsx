@@ -7,9 +7,7 @@ import { PopupLogin } from '../popups/PopupLogin';
 import { PopupMe } from '../popups/PopupMe';
 import { PopupPrompt } from '../popups/PopupPrompt';
 import { PopupRegister } from '../popups/PopupRegister';
-import { PopupTerminal } from '../popups/PopupTerminal';
 import UserTile from '../UserTile';
-import VerticalSeparator from '../VerticalSeparator';
 
 export default function Nav() {
   const [isRegistered, setIsRegistered] = useState(me.isRegistered);
@@ -42,7 +40,6 @@ export default function Nav() {
           }}
         >
           <img className="logo" src="assets/images/logo.png" alt="logo" />
-          {/* <span className="logo">Knobel</span> */}
           <i className="fas fa-home" />
         </button>
         <button
@@ -55,15 +52,6 @@ export default function Nav() {
         </button>
         <button className="btn-taskbar hide-mobile">
           <span>Shop</span>
-        </button>
-        <button
-          className="btn-taskbar hide-mobile"
-          onClick={() => {
-            PopupMediator.open(PopupTerminal);
-          }}
-        >
-          <i className="fas fa-keyboard"></i>
-          <span>Terminal</span>
         </button>
       </div>
       <div className="taskbar-group hide-mobile">

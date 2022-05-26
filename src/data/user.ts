@@ -9,15 +9,15 @@ export class User {
   id?: string;
   isRegistered?: boolean;
   name?: string;
-  currentAvatar?: string;
+  avatar?: string;
   level?: number;
   status?: OnlineStatus.ONLINE | OnlineStatus.OFFLINE;
 }
 
 export class Me extends User {
   email?: string;
-  avatar?: string;
   wallpaper?: string;
+  note?: string;
   gold?: number;
   experience?: number;
   friends?: User[];

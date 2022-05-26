@@ -50,6 +50,15 @@ div.user-tile {
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
+
+  img {
+    transform: rotate(5deg);
+    height: 4rem;
+    padding: 0.4rem;
+    margin-right: 0.4rem;
+    background-color: white;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+  }
 }
 
 .badge {

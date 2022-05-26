@@ -15,6 +15,7 @@ import './assets/css/popups.css';
 import './assets/css/progress-bar.css';
 import './assets/css/shop.css';
 import './assets/css/terminal.css';
+import './assets/css/collection.css';
 
 // Media Queries
 import './assets/css/platform-queries.css';

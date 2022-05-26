@@ -5,38 +5,14 @@ import { rootElement } from '../..';
 import Connection, { ConnectionEventType } from '../../controllers/connection';
 import { getItemById } from '../../data/item';
 import { me, Me } from '../../data/user';
-
-type State = {
-  user: Me | null;
-};
+import { calculateExperienceNeededForNextLevel } from '../../utils';
+import {
+  AvatarItemCollection,
+  WallpaperItemCollection
+} from '../ItemCollection';
+import ProgressBar from '../ProgressBar';
 
 export class PopupMe extends React.Component<PopupProps> {
-  public readonly state: State = {
-    user: null
-  };
-
-  private onUserDataChanged() {
-    this.setState({
-      user: me
-    });
-  }
-
-  public componentDidMount() {
-    this.onUserDataChanged();
-
-    Connection.instance.addListener(
-      ConnectionEventType.USER_DATA_CHANGED,
-      this.onUserDataChanged.bind(this)
-    );
-  }
-
-  public componentWillUnmount() {
-    Connection.instance.removeListener(
-      ConnectionEventType.USER_DATA_CHANGED,
-      this.onUserDataChanged
-    );
-  }
-
   render() {
     const { isOpen, onClose } = this.props;
     return (
@@ -50,7 +26,7 @@ export class PopupMe extends React.Component<PopupProps> {
           </div>
           <div className="popup-content">
             <div className="profile-data v-group center">
-              {me.isRegistered && (
+              {!me.isRegistered && (
                 <>
                   <div className="alert warn">
                     <img src={'assets/avatars/system.png'} alt="" />
@@ -62,39 +38,76 @@ export class PopupMe extends React.Component<PopupProps> {
                   </div>
                 </>
               )}
-
-              <pre>{JSON.stringify(this.state.user)}</pre>
-
-              <div className="panel v-group">
-                <div className=" profile-editable-item">
-                  <span className="muted">Email</span>
-                  <span>{this.state.user?.email}</span>
-                  <button className="btn-link">
-                    <i className="fas fa-pen" />
-                  </button>
-                </div>
-                <div className="profile-editable-item">
-                  <span className="muted">Password</span>
-                  <span>********</span>
-                  <button className="btn-link">
-                    <i className="fas fa-pen" />
-                  </button>
-                </div>
+              <div className="h-group center">
+                <img
+                  className="avatar"
+                  src={'assets/' + getItemById(me.avatar!)?.value.url}
+                  alt=""
+                />
               </div>
-
               <div className="user-with-badge">
                 {!me.isRegistered && <span className="badge guest">Guest</span>}
-                <h1>{this.state.user?.name}</h1>
+                <h1>{me.name}</h1>
               </div>
+              <span className="emphasized text-center h-group">
+                <i className="fas fa-quote-left muted" />
+                <span>{me.note}</span>
+                <i className="fas fa-quote-right muted" />
+              </span>
+              <div className="level-group v-group center">
+                <span>{`Level ${me.level}`}</span>
+                <ProgressBar
+                  percent={Math.min(
+                    me.experience! /
+                      calculateExperienceNeededForNextLevel(me.level!)
+                  )}
+                />
+              </div>
+              {me.isRegistered && (
+                <div className="panel v-group">
+                  <div className=" profile-editable-item">
+                    <span className="muted">Email</span>
+                    <span>{me.email}</span>
+                    <button className="btn-link">
+                      <i className="fas fa-pen" />
+                    </button>
+                  </div>
+                  <div className="profile-editable-item">
+                    <span className="muted">Password</span>
+                    <span>********</span>
+                    <button className="btn-link">
+                      <i className="fas fa-pen" />
+                    </button>
+                  </div>
+                </div>
+              )}
+              <div className="profile-collections">
+                <AvatarItemCollection
+                  title="Avatars"
+                  items={me.getItems().filter((item) => item.type === 'avatar')}
+                />
+                <WallpaperItemCollection
+                  title="Wallpapers"
+                  items={me
+                    .getItems()
+                    .filter((item) => item.type === 'wallpaper')}
+                />
+              </div>
+            </div>
+          </div>
 
-              <button
-                className="btn"
-                onClick={() => {
-                  Connection.instance.fetchMyUserData();
-                }}
-              >
-                Refresh
-              </button>
+          <div className="popup-taskbar">
+            <div className="v-group center">
+              <div className="h-group">
+                <button
+                  className="btn-link"
+                  onClick={() => {
+                    navigator.clipboard.writeText(me.id!);
+                  }}
+                >
+                  {`Id: ${me.id}`}
+                </button>
+              </div>
             </div>
           </div>
         </div>
