@@ -135,8 +135,11 @@
 
 // My Profile Popup
 .profile-data {
-  .warn {
+  .profile-header {
+    width: 100%;
     margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed #00000020;
   }
 
   img.avatar {

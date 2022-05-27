@@ -120,6 +120,26 @@ export default class Connection extends EventEmitter {
     }
   }
 
+  public async resendVerificationEmail() {
+    await axios.get(SERVER_URL + 'verify');
+    Terminal.log('✔️ Verification email sent');
+    PopupMediator.open(PopupSuccess, {
+      title: 'Verification email sent',
+      message: 'Check your email.'
+    });
+  }
+
+  public async verifyEmail(code: string) {
+    try {
+      await axios.post(SERVER_URL + 'verify', {
+        code
+      });
+      Terminal.log('✔️ Email verified');
+    } catch (err) {
+      Terminal.log('❌', `${err}`);
+    }
+  }
+
   public async login(email: string | null, password: string | null) {
     PopupMediator.open(PopupLoading);
 

@@ -20,6 +20,10 @@ div.alert {
     color: $error;
     background-color: $error-muted;
   }
+  &.success {
+    color: $success;
+    background-color: $success-muted;
+  }
 
   button {
     margin-left: auto;

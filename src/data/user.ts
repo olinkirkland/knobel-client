@@ -16,6 +16,7 @@ export class User {
 
 export class Me extends User {
   email?: string;
+  isVerified?: boolean;
   wallpaper?: string;
   note?: string;
   gold?: number;

@@ -18,6 +18,7 @@ import ProgressBar from '../ProgressBar';
 import { PopupInput } from './PopupInput';
 import { PopupInputEmail } from './PopupInputEmail';
 import { PopupInputPassword } from './PopupInputPassword';
+import { PopupInputVerifyCode } from './PopupInputVerifyCode';
 
 export class PopupMe extends React.Component<PopupProps> {
   public componentDidMount() {
@@ -51,18 +52,48 @@ export class PopupMe extends React.Component<PopupProps> {
           </div>
           <div className="popup-content">
             <div className="profile-data v-group center">
-              {!me.isRegistered && (
-                <>
-                  <div className="alert warn">
-                    <img src={'assets/avatars/system.png'} alt="" />
-                    <span>
-                      You are currently signed into a guest account.
-                      <br />
-                      Sign up to save your progress and customize your profile.
-                    </span>
-                  </div>
-                </>
-              )}
+              <div className="profile-header v-group">
+                {(!me.isRegistered && (
+                  <>
+                    <div className="alert warn">
+                      <img src={'assets/avatars/system.png'} alt="" />
+                      <span>
+                        You are currently signed into a guest account.
+                        <br />
+                        Sign up to save your progress and customize your
+                        profile.
+                      </span>
+                    </div>
+                  </>
+                )) ||
+                  (!me.isVerified && (
+                    <>
+                      <div className="alert warn">
+                        <img src={'assets/avatars/system.png'} alt="" />
+                        <div className="v-group">
+                          <span>
+                            You've been sent an Email to verify your Email
+                            address.
+                            <br />
+                            Once your Email is verified, you'll receive a
+                            welcome gift.
+                          </span>
+                        </div>
+                      </div>
+                      <div className="v-group center">
+                        <button
+                          className="btn"
+                          onClick={() => {
+                            PopupMediator.open(PopupInputVerifyCode);
+                          }}
+                        >
+                          <i className="fas fa-check" />
+                          Verify my Email
+                        </button>
+                      </div>
+                    </>
+                  ))}
+              </div>
               <div className="h-group center">
                 <img
                   className="avatar"
@@ -92,7 +123,7 @@ export class PopupMe extends React.Component<PopupProps> {
               </div>
               {me.isRegistered && (
                 <div className="v-group profile-info">
-                  <div className="h-group center">
+                  <div className="h-group spread center">
                     <button
                       className={`btn-link ${
                         countNameChanges() === 0 ? 'disabled' : ''
