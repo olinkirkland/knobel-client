@@ -121,7 +121,7 @@ export default class Connection extends EventEmitter {
   }
 
   public async resendVerificationEmail() {
-    await axios.get(SERVER_URL + 'verify');
+    await axios.get(SERVER_URL + 'me/send-verify-email');
     Terminal.log('✔️ Verification email sent');
     PopupMediator.open(PopupSuccess, {
       title: 'Verification email sent',
@@ -131,12 +131,20 @@ export default class Connection extends EventEmitter {
 
   public async verifyEmail(code: string) {
     try {
-      await axios.post(SERVER_URL + 'verify', {
+      await axios.post(SERVER_URL + 'me/verify', {
         code
       });
       Terminal.log('✔️ Email verified');
-    } catch (err) {
+      PopupMediator.open(PopupSuccess, {
+        title: 'Email verified',
+        message: `Thanks for verifying your Email. Here's some free gold!`
+      });
+    } catch (err: any) {
       Terminal.log('❌', `${err}`);
+      PopupMediator.open(PopupError, {
+        title: 'Verification failed',
+        message: 'Make sure you entered the correct code.'
+      });
     }
   }
 
