@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import { PopupProps } from 'react-popup-manager';
 import { rootElement } from '../..';
-import Connection from '../../controllers/connection';
+import Connection, { ConnectionEventType } from '../../controllers/connection';
 import PopupMediator from '../../controllers/popupMediator';
 import { getItemById } from '../../data/item';
 import { me } from '../../data/user';
@@ -20,6 +20,24 @@ import { PopupInputEmail } from './PopupInputEmail';
 import { PopupInputPassword } from './PopupInputPassword';
 
 export class PopupMe extends React.Component<PopupProps> {
+  public componentDidMount() {
+    Connection.instance.addListener(
+      ConnectionEventType.USER_DATA_CHANGED,
+      this.onUserDataChanged.bind(this)
+    );
+  }
+
+  public componentWillUnmount() {
+    Connection.instance.removeListener(
+      ConnectionEventType.USER_DATA_CHANGED,
+      this.onUserDataChanged.bind(this)
+    );
+  }
+
+  onUserDataChanged() {
+    this.forceUpdate();
+  }
+
   render() {
     const { isOpen, onClose } = this.props;
     return (

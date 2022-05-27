@@ -33,9 +33,6 @@ export default function Platform() {
   }, []);
 
   function onUserDataChanged() {
-    console.log(wallpaper);
-    console.log(getItemById(wallpaper!));
-    console.log(getItemById(wallpaper!)?.value.url);
     setWallpaper(me.wallpaper);
   }
 

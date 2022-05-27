@@ -1,5 +1,6 @@
 import axios from 'axios';
 import EventEmitter from 'events';
+import { connect, Socket } from 'socket.io-client';
 import { PopupError } from '../components/popups/PopupError';
 import { PopupLoading } from '../components/popups/PopupLoading';
 import { PopupSuccess } from '../components/popups/PopupSuccess';
@@ -13,6 +14,7 @@ export const VERSION: string = '1.0.0';
 export const DEV_MODE: boolean = location.hostname === 'localhost';
 export const SERVER_URL: string = 'http://localhost:3000/';
 export const AUTH_URL: string = 'http://localhost:3001/';
+export const SOCKET_URL: string = 'http://localhost:3002/';
 
 export enum ConnectionEventType {
   ACCESS_TOKEN_CHANGED = 'accessTokenChanged',
@@ -25,6 +27,9 @@ export default class Connection extends EventEmitter {
   // Token
   public refreshToken?: string;
   public accessToken?: string;
+
+  // Socket
+  private socket!: Socket;
 
   private constructor() {
     super();
@@ -76,8 +81,7 @@ export default class Connection extends EventEmitter {
       Terminal.log('🔑', 'Refresh token found in local storage');
       this.refreshToken = storedRefreshToken;
       me.id = await this.fetchAccessToken();
-      await this.fetchMyUserData();
-      PopupMediator.close();
+      this.connect();
     } else {
       Terminal.log('🔑', 'No refresh token found in local storage');
       this.login(null, null);
@@ -146,12 +150,11 @@ export default class Connection extends EventEmitter {
 
       this.refreshToken = res.data.refreshToken;
       this.accessToken = res.data.accessToken;
-      this.fetchMyUserData();
       this.emit(ConnectionEventType.ACCESS_TOKEN_CHANGED);
 
       // Save the refresh token to local storage
       localStorage.setItem('refresh-token', this.refreshToken!);
-      PopupMediator.close();
+      this.connect();
     } catch (err: any) {
       localStorage.removeItem('refresh-token');
       PopupMediator.open(PopupError, {
@@ -159,6 +162,30 @@ export default class Connection extends EventEmitter {
         message: err.response.data
       });
     }
+  }
+
+  private connect() {
+    if (this.socket) this.socket.disconnect(); // Disconnect if already connected
+
+    Terminal.log('🔌', 'Connecting to socket server', '...');
+    this.socket = connect(SOCKET_URL, {
+      query: {
+        token: this.refreshToken
+      }
+    });
+
+    // Add socket listeners
+    this.socket?.on('connect', async () => {
+      Terminal.log(`✔️ Connected to ${SERVER_URL} as ${me.id}`);
+      await this.fetchMyUserData();
+      PopupMediator.close();
+    });
+
+    // On invalidate
+    this.socket?.on('invalidate', () => {
+      console.log('--invalidate');
+      this.fetchMyUserData();
+    });
   }
 
   public async logout() {
