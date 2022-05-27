@@ -1,5 +1,5 @@
-import Modal from 'react-modal';
 import React from 'react';
+import Modal from 'react-modal';
 import { PopupProps } from 'react-popup-manager';
 import { rootElement } from '../../index';
 
@@ -22,6 +22,11 @@ export class PopupSuccess extends React.Component<PopupSuccessProps> {
           </div>
           <div className="popup-content">
             <p>{message}</p>
+          </div>
+          <div className="popup-taskbar">
+            <button className="btn" onClick={onClose}>
+              <span>OK</span>
+            </button>
           </div>
         </div>
       </Modal>

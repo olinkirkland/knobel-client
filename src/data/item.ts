@@ -1,4 +1,5 @@
 import avatarDefinitions from '../assets/item-definitions/avatars.json';
+import miscDefinitions from '../assets/item-definitions/misc.json';
 import wallpaperDefinitions from '../assets/item-definitions/wallpapers.json';
 
 export default interface Item {
@@ -10,7 +11,14 @@ export default interface Item {
   value: any;
 }
 
-const itemDefinitions: Item[] = [...avatarDefinitions, ...wallpaperDefinitions];
+const itemDefinitions: Item[] = [
+  ...avatarDefinitions,
+  ...wallpaperDefinitions,
+  ...miscDefinitions
+];
+
 export function getItemById(id: string): Item | undefined {
-  return itemDefinitions.find((item) => item.id === id);
+  let item = itemDefinitions.find((item) => item.id === id);
+  if (!item) item = miscDefinitions.find((item) => item.name === 'unknown');
+  return item;
 }

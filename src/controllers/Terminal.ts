@@ -8,9 +8,7 @@ const helpCommands = [
   ['login', 'Login [email, password]'],
   ['register', 'Register [email, password]'],
   ['logout', 'Logout'],
-  ['cheat', 'Set a resource [resource, amount]'],
-  ['chat', 'Send a chat message to the general-chat [message]'],
-  ['inventory, inv', 'View your inventory']
+  ['chat', 'Send a chat message to the general-chat [message]']
 ];
 
 export enum TerminalEventType {

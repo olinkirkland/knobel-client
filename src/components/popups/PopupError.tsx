@@ -23,6 +23,11 @@ export class PopupError extends React.Component<PopupErrorProps> {
           <div className="popup-content">
             <p>{message}</p>
           </div>
+          <div className="popup-taskbar">
+            <button className="btn" onClick={onClose}>
+              <span>OK</span>
+            </button>
+          </div>
         </div>
       </Modal>
     );

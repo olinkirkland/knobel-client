@@ -35,6 +35,10 @@
     &.popup-profile {
       width: 60rem;
 
+      .profile-info {
+        width: 100%;
+      }
+
       .profile-collections {
         width: 100%;
         display: flex;
@@ -97,12 +101,12 @@
         gap: 1rem;
 
         // Title
-        h2 {
-        }
+        // h2 {
+        // }
 
         // Body
-        p {
-        }
+        // p {
+        // }
 
         // Image
         img {

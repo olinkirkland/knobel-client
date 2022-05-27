@@ -10,8 +10,10 @@ button {
   align-items: center;
   gap: 0.6rem;
 
-  button[disabled] {
+  &.disabled {
     opacity: 0.4;
+    cursor: inherit;
+    pointer-events: none;
   }
 }
 

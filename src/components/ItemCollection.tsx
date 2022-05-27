@@ -1,3 +1,4 @@
+import Connection from '../controllers/connection';
 import Item, { getItemById } from '../data/item';
 import { me } from '../data/user';
 
@@ -32,7 +33,7 @@ export function AvatarItemCollection({ title, items }: Props) {
           return (
             <li
               onClick={() => {
-                // Connection.instance.changeAvatar(item.id);
+                Connection.instance.editAvatar(item.id);
               }}
               key={item.id}
               className={
@@ -62,7 +63,7 @@ export function WallpaperItemCollection({ title, items }: Props) {
         {items.map((item) => (
           <li
             onClick={() => {
-              // Connection.instance.changeWallpaper(item.id);
+              Connection.instance.editWallpaper(item.id);
             }}
             key={item.id}
             className={

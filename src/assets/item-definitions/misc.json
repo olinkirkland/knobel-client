@@ -1,0 +1,22 @@
+[
+  {
+    "id": "unknown",
+    "type": "unknown",
+    "name": "Unknown",
+    "description": "Unidentified item.",
+    "tags": [],
+    "value": {
+      "url": "icons/unknown.png"
+    }
+  },
+  {
+    "id": "x8d0-fb9v",
+    "type": "name-change",
+    "name": "Name Change",
+    "description": "Use this to change your profile name.",
+    "tags": [],
+    "value": {
+      "url": "icons/change-name.png"
+    }
+  }
+]

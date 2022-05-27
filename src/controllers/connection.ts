@@ -2,6 +2,7 @@ import axios from 'axios';
 import EventEmitter from 'events';
 import { PopupError } from '../components/popups/PopupError';
 import { PopupLoading } from '../components/popups/PopupLoading';
+import { PopupSuccess } from '../components/popups/PopupSuccess';
 import { me } from '../data/user';
 import PopupMediator from './popupMediator';
 import Terminal, { TerminalEventType } from './terminal';
@@ -115,7 +116,7 @@ export default class Connection extends EventEmitter {
     }
   }
 
-  public login(email: string | null, password: string | null) {
+  public async login(email: string | null, password: string | null) {
     PopupMediator.open(PopupLoading);
 
     Terminal.log(
@@ -125,83 +126,171 @@ export default class Connection extends EventEmitter {
       '...'
     );
 
-    axios
-      .post(
-        AUTH_URL + 'login',
-        email && password ? { email: email, password: password } : null
-      )
-      .then((res) => {
-        if (!res.data.id) {
-          PopupMediator.open(PopupError, {
-            title: 'Login failed',
-            message: 'Could not login with the provided credentials.'
-          });
-          localStorage.removeItem('refresh-token');
-          return;
-        }
+    const res = await axios.post(
+      AUTH_URL + 'login',
+      email && password ? { email: email, password: password } : null
+    );
 
-        me.id = res.data.id;
-        Terminal.log('✔️ Logged in as', me.id);
-
-        this.refreshToken = res.data.refreshToken;
-        this.accessToken = res.data.accessToken;
-        this.fetchMyUserData();
-        this.emit(ConnectionEventType.ACCESS_TOKEN_CHANGED);
-
-        // Save the refresh token to local storage
-        localStorage.setItem('refresh-token', this.refreshToken!);
-        PopupMediator.close();
-      })
-      .catch((err) => {
-        localStorage.removeItem('refresh-token');
+    try {
+      if (!res.data.id) {
         PopupMediator.open(PopupError, {
           title: 'Login failed',
-          message: err.response.data
+          message: 'Could not login with the provided credentials.'
         });
-
+        localStorage.removeItem('refresh-token');
         return;
+      }
+
+      me.id = res.data.id;
+      Terminal.log('✔️ Logged in as', me.id);
+
+      this.refreshToken = res.data.refreshToken;
+      this.accessToken = res.data.accessToken;
+      this.fetchMyUserData();
+      this.emit(ConnectionEventType.ACCESS_TOKEN_CHANGED);
+
+      // Save the refresh token to local storage
+      localStorage.setItem('refresh-token', this.refreshToken!);
+      PopupMediator.close();
+    } catch (err: any) {
+      localStorage.removeItem('refresh-token');
+      PopupMediator.open(PopupError, {
+        title: 'Login failed',
+        message: err.response.data
       });
+    }
   }
 
-  public logout() {
+  public async logout() {
     // Clear stored refresh token
     localStorage.removeItem('refresh-token');
 
-    axios
-      .post(AUTH_URL + 'logout', {
-        refreshToken: this.refreshToken
-      })
-      .then((res) => {
-        Terminal.log('✔️ Logged out');
+    await axios.post(AUTH_URL + 'logout', {
+      refreshToken: this.refreshToken
+    });
 
-        // Reload the page
-        window.location.reload();
-      });
+    Terminal.log('✔️ Logged out');
+
+    // Reload the page
+    window.location.reload();
   }
 
-  public register(email: string, password: string) {
+  public async register(email: string, password: string) {
     PopupMediator.open(PopupLoading);
 
     Terminal.log('🔑', `Registering ${email} / ${password}`, '...');
-    axios
-      .post(AUTH_URL + 'register', {
+    try {
+      await axios.post(AUTH_URL + 'register', {
         email: email,
         password: password
-      })
-      .then((res) => {
-        Terminal.log('✔️ Registered');
-        
-        // Automatically login
-        this.login(email, password);
-      })
-      .catch((err) => {
-        PopupMediator.open(PopupError, {
-          title: 'Registration failed',
-          message: err.response.data
-        });
-
-        return;
       });
+
+      Terminal.log('✔️ Registered');
+
+      // Automatically login
+      this.login(email, password);
+    } catch (err: any) {
+      PopupMediator.open(PopupError, {
+        title: 'Registration failed',
+        message: err.response.data
+      });
+    }
+  }
+
+  public async editEmail(password: string, email: string) {
+    Terminal.log('✏️', 'Editing Email', '...');
+    try {
+      await axios.post(SERVER_URL + 'me/email', {
+        email: email,
+        password: password
+      });
+      Terminal.log('✔️ Email edited');
+      PopupMediator.open(PopupSuccess, {
+        title: 'Email changed',
+        message: `Your email was successfully changed to ${email}.`
+      });
+    } catch (err: any) {
+      PopupMediator.open(PopupError, {
+        title: `Couldn't change Email.`,
+        message: err.response.data
+      });
+    }
+  }
+
+  public async editPassword(password: string, newPassword: string) {
+    Terminal.log('✏️', 'Editing Password', '...');
+    try {
+      await axios.post(SERVER_URL + 'me/password', {
+        password: password,
+        newPassword: newPassword
+      });
+      Terminal.log('✔️ Password edited');
+      PopupMediator.open(PopupSuccess, {
+        title: 'Password changed',
+        message: `Your password was successfully changed.`
+      });
+    } catch (err: any) {
+      Terminal.log('❌', `${err}`);
+      PopupMediator.open(PopupError, {
+        title: `Couldn't change password.`,
+        message: err.response.data
+      });
+    }
+  }
+
+  public async editNote(note: string) {
+    Terminal.log('✏️', 'Editing Note', '...');
+    try {
+      await axios.post(SERVER_URL + 'me/note', {
+        note: note
+      });
+      PopupMediator.open(PopupSuccess, {
+        title: 'Status changed',
+        message: `Your status was successfully changed.`
+      });
+    } catch (err) {
+      Terminal.log('❌', `${err}`);
+    }
+  }
+
+  public async editAvatar(avatar: string) {
+    Terminal.log('✏️', 'Editing Avatar', '...');
+    try {
+      await axios.post(SERVER_URL + 'me/avatar', {
+        avatar: avatar
+      });
+      Terminal.log('✔️ Avatar edited');
+    } catch (err) {
+      Terminal.log('❌', `${err}`);
+    }
+  }
+
+  public async editWallpaper(wallpaper: string) {
+    Terminal.log('✏️', 'Editing Wallpaper', '...');
+    try {
+      await axios.post(SERVER_URL + 'me/wallpaper', {
+        wallpaper: wallpaper
+      });
+      Terminal.log('✔️ Wallpaper edited');
+    } catch (err) {
+      Terminal.log('❌', `${err}`);
+    }
+  }
+
+  public async editName(name: string) {
+    Terminal.log('✏️', 'Editing Name', '...');
+    try {
+      await axios.post(SERVER_URL + 'me/name', {
+        name: name
+      });
+      Terminal.log('✔️ Name edited');
+      PopupMediator.open(PopupSuccess, {
+        title: 'Name changed',
+        message: `Your name was successfully changed to ${name}.`
+      });
+    } catch (err) {
+      Terminal.log('❌', `${err}`);
+    }
   }
 
   // Terminal listeners trigger Connection functions
@@ -219,6 +308,9 @@ export default class Connection extends EventEmitter {
           break;
         case 'logout':
           this.logout();
+          break;
+        case 'edit-email':
+          this.editEmail(arr[0], arr[1]);
           break;
       }
     });

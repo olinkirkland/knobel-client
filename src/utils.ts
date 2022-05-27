@@ -1,3 +1,5 @@
+import { me } from './data/user';
+
 export function garbageCollectModals() {
   setTimeout(() => {
     const modals = document.querySelectorAll('.ReactModalPortal');
@@ -21,7 +23,7 @@ export function calculateExperienceNeededForNextLevel(level: number): number {
 export function validateEmail(email: string): boolean {
   // Validate email
   const re =
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 }
 
@@ -54,4 +56,11 @@ function isUrl(str: string) {
 export function linkFromString(str: string) {
   if (str.indexOf('//') >= 0) return str;
   return '//' + str;
+}
+
+export function countNameChanges(): number {
+  return me.inventory!.reduce((acc, item) => {
+    if (item === 'x8d0-fb9v') return acc + 1;
+    return acc;
+  }, 0);
 }
