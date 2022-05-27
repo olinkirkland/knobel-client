@@ -7,6 +7,7 @@ import { PopupLogin } from '../popups/PopupLogin';
 import { PopupMe } from '../popups/PopupMe';
 import { PopupPrompt } from '../popups/PopupPrompt';
 import { PopupRegister } from '../popups/PopupRegister';
+import { PopupShop } from '../popups/PopupShop';
 import UserTile from '../UserTile';
 
 export default function Nav() {
@@ -50,7 +51,12 @@ export default function Nav() {
         >
           <span>Play Now</span>
         </button>
-        <button className="btn-taskbar hide-mobile">
+        <button
+          className="btn-taskbar hide-mobile"
+          onClick={() => {
+            PopupMediator.open(PopupShop);
+          }}
+        >
           <span>Shop</span>
         </button>
       </div>

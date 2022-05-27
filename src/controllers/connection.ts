@@ -252,6 +252,18 @@ export default class Connection extends EventEmitter {
     }
   }
 
+  public async buyItem(item: string) {
+    Terminal.log('🛒', 'Buying item', item, '...');
+    try {
+      await axios.post(SERVER_URL + 'shop/buy', {
+        item
+      });
+      Terminal.log('✔️ Bought item');
+    } catch (err: any) {
+      Terminal.log('❌', `${err}`);
+    }
+  }
+
   public async editEmail(password: string, email: string) {
     Terminal.log('✏️', 'Editing Email', '...');
     try {
