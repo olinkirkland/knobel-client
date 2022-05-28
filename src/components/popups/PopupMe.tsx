@@ -83,13 +83,13 @@ export class PopupMe extends React.Component<PopupProps> {
                         </div>
                         <div className="v-group center">
                           <button
-                            className="btn"
+                            className="btn selected"
                             onClick={() => {
                               PopupMediator.open(PopupInputVerifyCode);
                             }}
                           >
                             <i className="fas fa-check" />
-                            Verify
+                            Verify Email
                           </button>
                         </div>
                       </>
@@ -103,10 +103,11 @@ export class PopupMe extends React.Component<PopupProps> {
                   alt=""
                 />
               </div>
-              <div className="user-with-badge">
-                {!me.isRegistered && <span className="badge guest">Guest</span>}
-                <h1>{me.name}</h1>
-              </div>
+              {!me.isRegistered && <span className="badge guest">Guest</span>}
+              {me.isRegistered && me.isVerified && (
+                <span className="badge verified">Guest</span>
+              )}
+              <h1>{me.name}</h1>
               <span className="emphasized text-center h-group">
                 <i className="fas fa-quote-left muted" />
                 <span>{me.note}</span>
@@ -216,7 +217,7 @@ export class PopupMe extends React.Component<PopupProps> {
             <div className="v-group center">
               <div className="h-group">
                 <button
-                  className="btn-link"
+                  className="btn-link btn-id"
                   onClick={() => {
                     navigator.clipboard.writeText(me.id!);
                   }}

@@ -28,10 +28,6 @@
     display: flex;
     flex-direction: column;
 
-    &.popup-fit {
-      min-width: 0;
-    }
-
     &.popup-profile {
       width: 60rem;
 
@@ -62,6 +58,15 @@
       }
     }
 
+    &.popup-loading {
+      padding: 2rem;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      color: white;
+      background-color: #00000040;
+    }
+
     .popup-header {
       display: flex;
       justify-content: space-between;
@@ -78,11 +83,6 @@
       &.popup-success {
         background-color: $success-muted;
         color: $success;
-      }
-
-      &.popup-loading {
-        color: white;
-        background-color: $text-muted;
       }
     }
 
@@ -138,8 +138,6 @@
   .profile-header {
     width: 100%;
     margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px dashed #00000020;
   }
 
   img.avatar {

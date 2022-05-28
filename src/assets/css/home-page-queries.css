@@ -1,2 +1,2 @@
-@media (max-width: 48em){.home-grid{-ms-grid-columns:1fr !important;grid-template-columns:1fr !important;-ms-grid-rows:(1fr)[4];grid-template-rows:repeat(4, 1fr)}.home-grid .home-panel{max-height:8rem}.home-grid .home-panel .home-panel-content p{display:none}.home-grid .home-panel.big{grid-column:span 1}}
+@media (max-width: 48em){.home-grid{-ms-grid-columns:1fr !important;grid-template-columns:1fr !important;-ms-grid-rows:(1fr)[4];grid-template-rows:repeat(4, 1fr)}.home-grid .home-panel{max-height:8rem}.home-grid .home-panel img{opacity:1}.home-grid .home-panel .home-panel-content p{display:none}.home-grid .home-panel.big{grid-column:span 1}}
 /*# sourceMappingURL=home-page-queries.css.map */

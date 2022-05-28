@@ -68,6 +68,10 @@ div.user-tile {
   padding: 0.2rem 0.4rem;
   border-radius: 5px;
   background-color: #00000030;
+
+  .verified {
+    background-color: $primary-muted;
+  }
 }
 
 .page {

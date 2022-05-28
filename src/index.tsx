@@ -12,6 +12,7 @@ import './assets/css/home-page.css';
 import './assets/css/input.css';
 import './assets/css/platform.css';
 import './assets/css/popups.css';
+import './assets/css/popups-queries.css';
 import './assets/css/progress-bar.css';
 import './assets/css/shop.css';
 import './assets/css/terminal.css';

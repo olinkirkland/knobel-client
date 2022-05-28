@@ -34,7 +34,6 @@
       .btn-taskbar:first-child {
         // Logo button
         margin: 0;
-        margin-left: 1rem;
         padding: 0;
         justify-content: center;
         border-right: none;
@@ -67,6 +66,10 @@
 
         span {
           display: none;
+        }
+
+        .badge {
+          margin-right: 0.8rem;
         }
       }
     }

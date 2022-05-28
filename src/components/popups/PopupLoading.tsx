@@ -16,10 +16,8 @@ export class PopupLoading extends React.Component<PopupLoadingProps> {
         appElement={rootElement!}
         className={`modal ${isOpaque && 'opaque'}`}
       >
-        <div className="popup popup-fit">
-          <div className="popup-header popup-loading">
-            <span>Loading ...</span>
-          </div>
+        <div className="popup popup-loading">
+          <span>Loading ...</span>
         </div>
       </Modal>
     );

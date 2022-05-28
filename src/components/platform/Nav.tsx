@@ -70,10 +70,10 @@ export default function Nav() {
           <UserTile />
         </button>
 
-        <div className='hide-mobile'>
+        <>
           {(isRegistered && (
             <button
-              className="btn-taskbar align-right"
+              className="btn-taskbar align-right hide-mobile"
               onClick={() => {
                 PopupMediator.open(PopupPrompt, {
                   title: 'Are you sure?',
@@ -94,7 +94,7 @@ export default function Nav() {
           )) || (
             <>
               <button
-                className="btn-taskbar align-right"
+                className="btn-taskbar align-right hide-mobile"
                 onClick={() => {
                   PopupMediator.open(PopupLogin);
                 }}
@@ -102,7 +102,7 @@ export default function Nav() {
                 Login
               </button>
               <button
-                className="btn-taskbar align-right"
+                className="btn-taskbar align-right hide-mobile"
                 onClick={() => {
                   PopupMediator.open(PopupRegister);
                 }}
@@ -111,7 +111,7 @@ export default function Nav() {
               </button>
             </>
           )}
-        </div>
+        </>
       </div>
     </nav>
   );

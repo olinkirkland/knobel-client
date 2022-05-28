@@ -1,2 +1,2 @@
-@media (max-width: 48em){.popup{width:100%;padding:0}}
+@media (max-width: 48em){.modal .popup{min-width:inherit !important;max-width:inherit !important;min-height:inherit !important;max-height:inherit !important;width:100%;height:100% !important;margin:0;border-radius:0;position:relative}.modal .popup .btn-id{font-size:1.2rem}}
 /*# sourceMappingURL=popups-queries.css.map */

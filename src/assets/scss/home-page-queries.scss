@@ -6,6 +6,10 @@
     .home-panel {
       max-height: 8rem;
 
+      img {
+        opacity: 1;
+      }
+
       .home-panel-content p {
         display: none;
       }
