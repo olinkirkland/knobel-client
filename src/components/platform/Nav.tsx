@@ -60,7 +60,7 @@ export default function Nav() {
           <span>Shop</span>
         </button>
       </div>
-      <div className="taskbar-group hide-mobile">
+      <div className="taskbar-group">
         <button
           className="btn-user"
           onClick={() => {
@@ -70,46 +70,48 @@ export default function Nav() {
           <UserTile />
         </button>
 
-        {(isRegistered && (
-          <button
-            className="btn-taskbar align-right"
-            onClick={() => {
-              PopupMediator.open(PopupPrompt, {
-                title: 'Are you sure?',
-                message: 'This will log you out.',
-                confirm: 'Log Out',
-                cancel: 'Cancel',
-                onConfirm: () => {
-                  Connection.instance.logout();
-                },
-                onCancel: () => {
-                  PopupMediator.close();
-                }
-              });
-            }}
-          >
-            Log Out
-          </button>
-        )) || (
-          <>
+        <div className='hide-mobile'>
+          {(isRegistered && (
             <button
               className="btn-taskbar align-right"
               onClick={() => {
-                PopupMediator.open(PopupLogin);
+                PopupMediator.open(PopupPrompt, {
+                  title: 'Are you sure?',
+                  message: 'This will log you out.',
+                  confirm: 'Log Out',
+                  cancel: 'Cancel',
+                  onConfirm: () => {
+                    Connection.instance.logout();
+                  },
+                  onCancel: () => {
+                    PopupMediator.close();
+                  }
+                });
               }}
             >
-              Login
+              Log Out
             </button>
-            <button
-              className="btn-taskbar align-right"
-              onClick={() => {
-                PopupMediator.open(PopupRegister);
-              }}
-            >
-              Sign Up
-            </button>
-          </>
-        )}
+          )) || (
+            <>
+              <button
+                className="btn-taskbar align-right"
+                onClick={() => {
+                  PopupMediator.open(PopupLogin);
+                }}
+              >
+                Login
+              </button>
+              <button
+                className="btn-taskbar align-right"
+                onClick={() => {
+                  PopupMediator.open(PopupRegister);
+                }}
+              >
+                Sign Up
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </nav>
   );

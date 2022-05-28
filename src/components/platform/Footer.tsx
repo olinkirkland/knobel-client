@@ -98,14 +98,6 @@ export default function Footer() {
           <span>{accessToken}</span>
         </button>
         <button
-          className="btn-taskbar align-right show-mobile"
-          onClick={() => {
-            PopupMediator.open(PopupMe);
-          }}
-        >
-          <span>My Profile</span>
-        </button>
-        <button
           className="btn-taskbar align-right"
           onClick={() => {
             PopupMediator.open(PopupTerminal);

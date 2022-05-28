@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAAA,MAAM,EAAE,SAAS,EAAE,IAAI,EACrB,AAAA,MAAM,AAAC,CACL,KAAK,CAAE,IAAI,CACX,OAAO,CAAE,CAAC,CACX",
     "sources": [
         "../scss/popups-queries.scss"
     ],

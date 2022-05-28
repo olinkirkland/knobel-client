@@ -1,3 +1,5 @@
+import PopupMediator from '../../controllers/popupMediator';
+import { PopupShop } from '../popups/PopupShop';
 import HomePanel from './HomePanel';
 
 export default function HomePage() {
@@ -7,7 +9,7 @@ export default function HomePage() {
         <div className="home-grid">
           <HomePanel
             onClick={() => {
-              // PopupMediator.open(PopupShop);
+              PopupMediator.open(PopupShop);
             }}
             titleText="Avatars &amp; Wallpapers"
             buttonText="Shop"

@@ -17,22 +17,24 @@
     display: none !important;
   }
 
-  .taskbar .taskbar-group {
-    .btn-taskbar {
-      span {
-        white-space: nowrap;
+  .taskbar {
+    justify-content: center;
+    .taskbar-group {
+      .btn-taskbar {
+        span {
+          white-space: nowrap;
+        }
       }
     }
   }
 
   nav.taskbar {
-    flex-direction: column;
+    justify-content: space-between;
     .taskbar-group:first-child {
-      width: 100%;
       .btn-taskbar:first-child {
         // Logo button
-        width: 100%;
         margin: 0;
+        margin-left: 1rem;
         padding: 0;
         justify-content: center;
         border-right: none;
@@ -49,6 +51,23 @@
 
       .btn-taskbar:nth-child(3) {
         border-right: none;
+      }
+    }
+
+    .btn-user {
+      padding: 0 0.2rem;
+
+      .user-tile {
+        img {
+          transform: none;
+          background-color: transparent;
+          box-shadow: none;
+          margin: 0;
+        }
+
+        span {
+          display: none;
+        }
       }
     }
   }
