@@ -71,4 +71,12 @@
       }
     }
   }
+
+  footer.taskbar {
+    .taskbar-group:last-child {
+      .btn-taskbar {
+        border-left: none;
+      }
+    }
+  }
 }
