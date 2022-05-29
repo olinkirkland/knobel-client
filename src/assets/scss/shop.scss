@@ -1,4 +1,4 @@
-@import 'colors';
+@import "colors";
 
 .gold-box {
   color: $text-muted;
@@ -11,12 +11,24 @@
 
   .controls {
     justify-content: space-between;
+    width: 100%;
+
+    > .h-group {
+      flex-wrap: wrap;
+      width: 100%;
+      padding-bottom: 0.6rem;
+    }
+
+    .checkbox {
+      white-space: nowrap;
+    }
   }
 
   ul {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
+
     li.shop-card {
       display: flex;
       flex-direction: column;
@@ -53,7 +65,7 @@
 
         .item-type {
           font-size: 1.2rem;
-          color: $darker;
+          color: #00000020;
           text-transform: uppercase;
           text-align: center;
           letter-spacing: 1px;
@@ -101,7 +113,7 @@
           // color: $lighter;
 
           &:before {
-            content: '';
+            content: "";
             width: 100%;
             position: absolute;
             top: calc(50%);

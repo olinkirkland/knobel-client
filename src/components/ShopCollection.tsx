@@ -17,8 +17,7 @@ type Props = {
 
 enum PRICE_FILTER {
   ALL = 'all',
-  ON_SALE = 'on-sale',
-  AFFORDABLE = 'affordable'
+  ON_SALE = 'on-sale'
 }
 
 enum TYPE_FILTER {
@@ -64,14 +63,6 @@ export function ShopCollection({
 
         // On sale?
         if (filter.priceFilter === PRICE_FILTER.ON_SALE && item.discount === 0)
-          return false;
-
-        // Affordable?
-        if (
-          filter.priceFilter === PRICE_FILTER.AFFORDABLE &&
-          gold! < item.finalPrice &&
-          inventory!.indexOf(item.id)! < 0
-        )
           return false;
 
         // Type?
@@ -129,17 +120,6 @@ export function ShopCollection({
                 <img src="assets/icons/sale.png" alt="" />
                 On Sale
               </button>
-              <button
-                onClick={() => {
-                  setFilter({
-                    ...filter,
-                    priceFilter: PRICE_FILTER.AFFORDABLE
-                  });
-                }}
-                className="btn"
-              >
-                Affordable
-              </button>
             </ButtonBar>
             <VerticalSeparator />
             <ButtonBar>
@@ -196,7 +176,9 @@ export function ShopCollection({
               {inventory!.indexOf(item.id) === -1 && (
                 <>
                   <button
-                    className={`btn price ${gold! < item.finalPrice && 'disabled'}`}
+                    className={`btn price ${
+                      gold! < item.finalPrice && 'disabled'
+                    }`}
                     onClick={() => Connection.instance.buyItem(item.id)}
                   >
                     {item.discount > 0 && (

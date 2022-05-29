@@ -1,0 +1,21 @@
+@media (max-width: 48em) {
+  .shop-collection {
+    .controls {
+      flex-direction: column;
+      align-items: center;
+
+      > .h-group {
+        justify-content: center;
+      }
+
+      .vertical-separator {
+        display: none;
+      }
+    }
+
+    ul {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}

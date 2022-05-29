@@ -22,6 +22,7 @@ import './assets/css/collection.css';
 import './assets/css/platform-queries.css';
 import './assets/css/home-page-queries.css';
 import './assets/css/popups-queries.css';
+import './assets/css/shop-queries.css';
 
 export const rootElement = document.getElementById('root');
 

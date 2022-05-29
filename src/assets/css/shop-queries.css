@@ -1,1 +1,2 @@
-/* No CSS *//*# sourceMappingURL=shop-queries.css.map */
+@media (max-width: 48em){.shop-collection .controls{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.shop-collection .controls>.h-group{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.shop-collection .controls .vertical-separator{display:none}.shop-collection ul{display:-ms-grid;display:grid;-ms-grid-columns:(1fr)[1];grid-template-columns:repeat(1, 1fr)}}
+/*# sourceMappingURL=shop-queries.css.map */
