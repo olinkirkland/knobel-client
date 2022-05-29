@@ -40,7 +40,7 @@ export class PopupLogin extends React.Component<PopupLoginProps> {
 
     return (
       <Modal isOpen={isOpen!} appElement={rootElement!} className="modal">
-        <div className="popup">
+        <div className="popup popup-login">
           <div className="popup-header">
             <span>Login</span>
             <button className="btn-link btn-close" onClick={onClose}>
@@ -94,7 +94,7 @@ export class PopupLogin extends React.Component<PopupLoginProps> {
             )}
           </div>
           <div className="popup-taskbar">
-            <button className="btn">
+            <button className="btn-link">
               <span>Forgot password?</span>
             </button>
             <button className="btn" onClick={this.validateAndLogin.bind(this)}>

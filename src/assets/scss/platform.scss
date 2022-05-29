@@ -68,9 +68,16 @@ div.user-tile {
   padding: 0.2rem 0.4rem;
   border-radius: 5px;
   background-color: #00000030;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 
-  .verified {
-    background-color: $primary-muted;
+  i {
+    font-size: 1.2rem;
+  }
+
+  &.verified {
+    background-color: $primary;
   }
 }
 

@@ -13,5 +13,17 @@
     .btn-id {
       font-size: 1.2rem;
     }
+
+    &.popup-profile {
+      .profile-info .h-group {
+        flex-direction: column;
+      }
+    }
+
+    &.popup-login {
+      .popup-taskbar {
+        flex-direction: column-reverse;
+      }
+    }
   }
 }

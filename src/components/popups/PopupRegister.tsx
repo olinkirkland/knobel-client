@@ -131,7 +131,10 @@ export class PopupRegister extends React.Component<PopupRegisterProps> {
 
             <div className="alert warn">
               <img src={'assets/avatars/system.png'} alt="" />
-              <span>{`The progress from your current session will be saved to your new account. You will receive a welcome gift after verifying your Email.`}</span>
+              <span>
+                The progress from your current session will be saved to your new
+                account.
+              </span>
             </div>
           </div>
           <div className="popup-taskbar">

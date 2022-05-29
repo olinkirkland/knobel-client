@@ -19,6 +19,9 @@ import { PopupInput } from './PopupInput';
 import { PopupInputEmail } from './PopupInputEmail';
 import { PopupInputPassword } from './PopupInputPassword';
 import { PopupInputVerifyCode } from './PopupInputVerifyCode';
+import { PopupLogin } from './PopupLogin';
+import { PopupPrompt } from './PopupPrompt';
+import { PopupRegister } from './PopupRegister';
 
 export class PopupMe extends React.Component<PopupProps> {
   public componentDidMount() {
@@ -59,8 +62,6 @@ export class PopupMe extends React.Component<PopupProps> {
                       <div className="alert warn">
                         <img src={'assets/avatars/system.png'} alt="" />
                         <span>
-                          You are currently signed into a guest account.
-                          <br />
                           Sign up to save your progress and customize your
                           profile.
                         </span>
@@ -88,7 +89,7 @@ export class PopupMe extends React.Component<PopupProps> {
                               PopupMediator.open(PopupInputVerifyCode);
                             }}
                           >
-                            <i className="fas fa-check" />
+                            <i className="fas fa-envelope" />
                             Verify Email
                           </button>
                         </div>
@@ -105,7 +106,10 @@ export class PopupMe extends React.Component<PopupProps> {
               </div>
               {!me.isRegistered && <span className="badge guest">Guest</span>}
               {me.isRegistered && me.isVerified && (
-                <span className="badge verified">Guest</span>
+                <span className="badge verified">
+                  <i className="fas fa-check" />
+                  Verified
+                </span>
               )}
               <h1>{me.name}</h1>
               <span className="emphasized text-center h-group">
@@ -126,9 +130,9 @@ export class PopupMe extends React.Component<PopupProps> {
               </div>
               {me.isRegistered && (
                 <div className="v-group profile-info">
-                  <div className="h-group spread center">
+                  <div className="h-group center">
                     <button
-                      className={`btn-link ${
+                      className={`btn ${
                         countNameChanges() === 0 ? 'disabled' : ''
                       }`}
                       onClick={() => {
@@ -151,7 +155,7 @@ export class PopupMe extends React.Component<PopupProps> {
                       Change name ({countNameChanges()}x)
                     </button>
                     <button
-                      className="btn-link"
+                      className="btn"
                       onClick={() => {
                         PopupMediator.open(PopupInput, {
                           title: 'Edit your status',
@@ -215,6 +219,48 @@ export class PopupMe extends React.Component<PopupProps> {
 
           <div className="popup-taskbar">
             <div className="v-group center">
+              {
+                <div className="h-group center show-mobile">
+                  {!me.isRegistered && (
+                    <button
+                      className="btn"
+                      onClick={() => PopupMediator.open(PopupLogin)}
+                    >
+                      Login
+                    </button>
+                  )}
+                  {!me.isRegistered && (
+                    <button
+                      className="btn"
+                      onClick={() => PopupMediator.open(PopupRegister)}
+                    >
+                      Sign Up
+                    </button>
+                  )}
+                  {me.isRegistered && (
+                    <button
+                      className="btn"
+                      onClick={() =>
+                        PopupMediator.open(PopupPrompt, {
+                          title: 'Are you sure?',
+                          message: 'This will log you out.',
+                          confirm: 'Log Out',
+                          cancel: 'Cancel',
+                          onConfirm: () => {
+                            Connection.instance.logout();
+                          },
+                          onCancel: () => {
+                            PopupMediator.close();
+                          }
+                        })
+                      }
+                    >
+                      Logout
+                    </button>
+                  )}
+                </div>
+              }
+
               <div className="h-group">
                 <button
                   className="btn-link btn-id"

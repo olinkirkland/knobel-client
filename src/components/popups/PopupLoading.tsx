@@ -17,7 +17,7 @@ export class PopupLoading extends React.Component<PopupLoadingProps> {
         className={`modal ${isOpaque && 'opaque'}`}
       >
         <div className="popup popup-loading">
-          <span>Loading ...</span>
+          <span>Loading</span>
         </div>
       </Modal>
     );
