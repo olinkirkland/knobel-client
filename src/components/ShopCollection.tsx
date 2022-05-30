@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Connection, { ConnectionEventType } from '../controllers/connection';
+import { text } from '../controllers/locale';
 import { me } from '../data/user';
 import { numberComma } from '../utils';
 import ButtonBar from './ButtonBar';
@@ -106,7 +107,7 @@ export function ShopCollection({
                 }}
                 className="btn selected"
               >
-                All
+                {text('shop_all')}
               </button>
               <button
                 onClick={() => {
@@ -118,7 +119,7 @@ export function ShopCollection({
                 className="btn"
               >
                 <img src="assets/icons/sale.png" alt="" />
-                On Sale
+                {text('shop_onSale')}
               </button>
             </ButtonBar>
             <VerticalSeparator />
@@ -132,7 +133,7 @@ export function ShopCollection({
                 }}
                 className="btn selected"
               >
-                Avatars
+                {text('avatars')}
               </button>
               <button
                 onClick={() => {
@@ -143,7 +144,7 @@ export function ShopCollection({
                 }}
                 className="btn"
               >
-                Wallpapers
+                {text('wallpapers')}
               </button>
             </ButtonBar>
           </div>
@@ -155,7 +156,7 @@ export function ShopCollection({
                 showOwnedItems: b
               });
             }}
-            text="Show owned items"
+            text={text('shop_showOwnedItems')}
           />
         </div>
       )}
@@ -186,7 +187,7 @@ export function ShopCollection({
                         &nbsp;{numberComma(item.price)}&nbsp;
                       </span>
                     )}
-                    {(item.finalPrice === 0 && <p>FREE!</p>) ||
+                    {(item.finalPrice === 0 && <p>{text('shop_free')}</p>) ||
                       (item.finalPrice > 0 && (
                         <>
                           <img src="assets/icons/coin.png" alt="" />
@@ -196,13 +197,13 @@ export function ShopCollection({
                   </button>
                 </>
               )}
-              {inventory!.indexOf(item.id)! >= 0 && <p>Owned</p>}
+              {inventory!.indexOf(item.id)! >= 0 && <p>{text('shop_owned')}</p>}
             </div>
           </li>
         ))}
       </ul>
       {/* // If ul has no children, show this element */}
-      {items.length === 0 && <p>No items found</p>}
+      {items.length === 0 && <p>{text('shop_noItems')}</p>}
     </div>
   );
 }

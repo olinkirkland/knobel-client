@@ -1,8 +1,10 @@
+import { text } from '../../controllers/locale';
+
 export default function PopupLoading() {
   return (
     <div className={`modal`}>
       <div className="popup popup-loading">
-        <span>Loading</span>
+        <span>{text('loading')}</span>
       </div>
     </div>
   );

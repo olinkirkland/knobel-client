@@ -4,6 +4,7 @@ import Connection, {
   ConnectionEventType,
   SERVER_URL
 } from '../../controllers/connection';
+import { text } from '../../controllers/locale';
 import PopupMediator from '../../controllers/popupMediator';
 import Terminal from '../../controllers/terminal';
 import Item, { getItemById } from '../../data/item';
@@ -103,7 +104,7 @@ export function PopupShop() {
     <div className="modal">
       <div className="popup popup-shop">
         <div className="popup-header">
-          <span>Shop</span>
+          <span>{text('shop')}</span>
           <div className="gold-box h-group">
             <img src="assets/icons/coin.png" alt="" />
             <span className="gold-text">{numberComma(me.gold!)}</span>
@@ -114,7 +115,7 @@ export function PopupShop() {
         </div>
         <div className="popup-content">
           {shopItems.length > 0 && (
-            <ShopCollection name="Shop" items={shopItems} />
+            <ShopCollection name={text('shop')} items={shopItems} />
           )}
         </div>
       </div>
