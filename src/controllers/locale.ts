@@ -17,7 +17,6 @@ export let initialLanguage: Language = localStorage.getItem(
   'language'
 )! as Language;
 if (!initialLanguage) initialLanguage = Language.EN;
-console.log('>>> Language from localStorage:', initialLanguage);
 setAppLanguage(initialLanguage);
 
 export function setAppLanguage(value: Language) {
@@ -27,13 +26,11 @@ export function setAppLanguage(value: Language) {
       currentLanguage = value;
       locale = en;
       localStorage.setItem('language', currentLanguage);
-      console.log('>>> Language stored in localStorage:', currentLanguage);
       return;
     case Language.DE:
       currentLanguage = value;
       locale = de;
       localStorage.setItem('language', currentLanguage);
-      console.log('>>> Language stored in localStorage:', currentLanguage);
       return;
   }
 
@@ -43,6 +40,7 @@ export function setAppLanguage(value: Language) {
 
 export function text(key: string, ...args: any[]): string {
   const value = locale[key] ? locale[key] : `[${key}]`;
+  if (!locale[key]) console.log('Missing translation:', key);
   // Replace all instances of '%%' in the string with the passed in arguments
   return value.replace(/%%/g, () => args.shift());
 }

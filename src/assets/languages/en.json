@@ -10,7 +10,12 @@
   "level": "Level",
   "chat": "Chat",
   "login": "Login",
+  "logOut": "Logout",
   "register": "Sign Up",
   "playNow": "Play Now",
-  "shop": "Shop"
+  "shop": "Shop",
+  "cancel": "Cancel",
+  "promptLogout_title": "Are you sure?",
+  "promptLogout_message": "This will log you out.",
+  "promptLogout_confirm": "Logout"
 }

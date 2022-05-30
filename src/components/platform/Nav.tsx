@@ -58,7 +58,7 @@ export default function Nav() {
             PopupMediator.open(PopupShop);
           }}
         >
-          <span>Shop</span>
+          <span>{text('shop')}</span>
         </button>
       </div>
       <div className="taskbar-group">
@@ -77,10 +77,10 @@ export default function Nav() {
               className="btn-taskbar align-right hide-mobile"
               onClick={() => {
                 PopupMediator.open(PopupPrompt, {
-                  title: 'Are you sure?',
-                  message: 'This will log you out.',
-                  confirm: 'Log Out',
-                  cancel: 'Cancel',
+                  title: text('promptLogout_title'),
+                  message: text('promptLogout_message'),
+                  confirm: text('promptLogout_confirm'),
+                  cancel: text('cancel'),
                   onConfirm: () => {
                     Connection.instance.logout();
                   },
@@ -90,7 +90,7 @@ export default function Nav() {
                 });
               }}
             >
-              Log Out
+              {text('logOut')}
             </button>
           )) || (
             <>
@@ -100,7 +100,7 @@ export default function Nav() {
                   PopupMediator.open(PopupLogin);
                 }}
               >
-                Login
+                {text('login')}
               </button>
               <button
                 className="btn-taskbar align-right hide-mobile"
@@ -108,7 +108,7 @@ export default function Nav() {
                   PopupMediator.open(PopupRegister);
                 }}
               >
-                Sign Up
+                {text('register')}
               </button>
             </>
           )}

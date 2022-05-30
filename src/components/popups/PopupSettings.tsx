@@ -26,17 +26,6 @@ export function PopupSettings() {
         </div>
         <div className="popup-content">
           <p>{text('popupSettings_language_label')}</p>
-          {initialLanguage !== language && (
-            <div className="alert warn">
-              {text(
-                'popupSettings_language_warning',
-                initialLanguage,
-                language
-              )}
-            </div>
-          )}
-          {/* <p>initialLanguage={initialLanguage}</p> */}
-          {/* <p>currentLanguage={currentLanguage}</p> */}
           <div className="h-group center">
             <button
               className={
@@ -65,9 +54,25 @@ export function PopupSettings() {
               Deutsch
             </button>
           </div>
+          {initialLanguage !== language && (
+            <div className="alert warn">
+              <img src={'assets/avatars/system.png'} alt="" />
+
+              {text(
+                'popupSettings_language_warning',
+                initialLanguage,
+                language
+              )}
+            </div>
+          )}
         </div>
         <div className="popup-taskbar">
-          <button className="btn">
+          <button
+            className="btn"
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
             <i className="fas fa-redo" />
             {text('popupSettings_reload')}
           </button>

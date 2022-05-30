@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Connection, { ConnectionEventType } from '../../controllers/connection';
+import { text } from '../../controllers/locale';
 import PopupMediator from '../../controllers/popupMediator';
 import { me } from '../../data/user';
 import { calculateExperienceNeededForNextLevel } from '../../utils';
@@ -71,7 +72,10 @@ export default function Footer() {
     <footer className="taskbar">
       <div className="taskbar-group">
         <button className="btn-taskbar hide-mobile">
-          <span>{`Level ${level}`}</span>
+          <span>
+            {text('level')}&nbsp;
+            {level}
+          </span>
           <ProgressBar percent={percentExperience} />
         </button>
         <button className="btn-taskbar">
@@ -80,7 +84,7 @@ export default function Footer() {
         </button>
         <button className="btn-taskbar">
           <i className="fas fa-comment-alt" />
-          <span className="hide-mobile">Chat Room</span>
+          <span className="hide-mobile">{text('chat')}</span>
         </button>
       </div>
       <div className="taskbar-group">
