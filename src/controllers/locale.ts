@@ -21,21 +21,14 @@ setAppLanguage(initialLanguage);
 
 export function setAppLanguage(value: Language) {
   console.log('Setting language to: ' + value);
-  switch (value) {
-    case Language.EN:
-      currentLanguage = value;
-      locale = en;
-      localStorage.setItem('language', currentLanguage);
-      return;
-    case Language.DE:
-      currentLanguage = value;
-      locale = de;
-      localStorage.setItem('language', currentLanguage);
-      return;
-  }
+  currentLanguage = value;
+  if (value === Language.EN) locale = en;
+  if (value === Language.DE) locale = de;
+}
 
-  console.log('Language', value, 'not found');
-  console.log('Current language:', currentLanguage);
+export function setLanguageForNextStart(value: Language) {
+  currentLanguage = value;
+  localStorage.setItem('language', value);
 }
 
 export function text(key: string, ...args: any[]): string {

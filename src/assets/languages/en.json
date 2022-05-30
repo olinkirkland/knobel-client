@@ -51,5 +51,9 @@
   "popupPassword_confirm": "Change password",
   "popupPassword_warn": "Make sure your password has a good mix of upper and lowercase letters. Don't tell anyone your password!",
   "popupPassword_validation_passwordLength": "Please enter a valid password. Must be at least 8 characters long.",
-  "popupPassword_validation_passwordMatch": "Passwords do not match."
+  "popupPassword_validation_passwordMatch": "Passwords do not match.",
+  "popupSettings_title": "Settings",
+  "popupSettings_language_label": "Choose the platform language.",
+  "popupSettings_language_warn": "You must reload the page for the changes to take effect.",
+  "popupSettings_reload": "Reload"
 }

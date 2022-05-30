@@ -3,7 +3,7 @@ import {
   currentLanguage,
   initialLanguage,
   Language,
-  setAppLanguage,
+  setLanguageForNextStart,
   text
 } from '../../controllers/locale';
 import PopupMediator from '../../controllers/popupMediator';
@@ -12,12 +12,12 @@ export function PopupSettings() {
   const [language, setLanguage] = useState(currentLanguage);
 
   useEffect(() => {
-    setAppLanguage(language);
+    setLanguageForNextStart(language);
   }, [language]);
 
   return (
     <div className="modal">
-      <div className="popup">
+      <div className="popup popup-settings">
         <div className="popup-header">
           <span>{text('popupSettings_title')}</span>
           <button className="btn-link btn-close" onClick={PopupMediator.close}>
@@ -58,11 +58,7 @@ export function PopupSettings() {
             <div className="alert warn">
               <img src={'assets/avatars/system.png'} alt="" />
 
-              {text(
-                'popupSettings_language_warning',
-                initialLanguage,
-                language
-              )}
+              {text('popupSettings_language_warn', initialLanguage, language)}
             </div>
           )}
         </div>
