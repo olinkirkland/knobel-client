@@ -19,7 +19,6 @@ export default class PopupMediator extends EventEmitter {
   }
 
   public static open(componentType: ComponentType<any>, popupProps?: any) {
-    console.log('Opening popup', componentType, popupProps);
     PopupMediator.instance.emit(PopupMediatorEventType.OPEN, {
       componentType: componentType,
       popupProps: popupProps

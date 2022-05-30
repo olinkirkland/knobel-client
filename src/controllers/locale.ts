@@ -1,7 +1,7 @@
 import de from '../assets/languages/de.json';
 import en from '../assets/languages/en.json';
 
-enum Language {
+export enum Language {
   EN = 'en',
   DE = 'de'
 }
@@ -10,25 +10,35 @@ type Locale = {
   [key: string]: string;
 };
 
-let language: string = Language.EN;
+export let currentLanguage: Language = Language.EN;
 let locale: Locale = en;
 
-setLanguage(Language.EN);
-export function setLanguage(value: Language) {
+export let initialLanguage: Language = localStorage.getItem(
+  'language'
+)! as Language;
+if (!initialLanguage) initialLanguage = Language.EN;
+console.log('>>> Language from localStorage:', initialLanguage);
+setAppLanguage(initialLanguage);
+
+export function setAppLanguage(value: Language) {
   console.log('Setting language to: ' + value);
   switch (value) {
     case Language.EN:
-      language = value;
+      currentLanguage = value;
       locale = en;
-      return en;
+      localStorage.setItem('language', currentLanguage);
+      console.log('>>> Language stored in localStorage:', currentLanguage);
+      return;
     case Language.DE:
-      language = value;
+      currentLanguage = value;
       locale = de;
-      return de;
+      localStorage.setItem('language', currentLanguage);
+      console.log('>>> Language stored in localStorage:', currentLanguage);
+      return;
   }
 
   console.log('Language', value, 'not found');
-  console.log('Current language:', language);
+  console.log('Current language:', currentLanguage);
 }
 
 export function text(key: string, ...args: any[]): string {

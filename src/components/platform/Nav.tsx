@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Connection, { ConnectionEventType } from '../../controllers/connection';
+import { text } from '../../controllers/locale';
 import PageMediator, { PageType } from '../../controllers/pageMediator';
 import PopupMediator from '../../controllers/popupMediator';
 import { me } from '../../data/user';
@@ -49,7 +50,7 @@ export default function Nav() {
             PageMediator.open(PageType.GAME);
           }}
         >
-          <span>Play Now</span>
+          <span>{text('playNow')}</span>
         </button>
         <button
           className="btn-taskbar hide-mobile"

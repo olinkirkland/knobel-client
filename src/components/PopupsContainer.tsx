@@ -23,7 +23,6 @@ export default function PopupsContainer() {
   function openPopup(componentType: ComponentType, popupProps: any) {
     // Unmount all children of popup-frame
     const currentPopup = document.querySelector('.popup-frame');
-    console.log('closing popup:', currentPopup);
     if (currentPopup) ReactDOM.unmountComponentAtNode(currentPopup);
 
     // Get popup-frame element

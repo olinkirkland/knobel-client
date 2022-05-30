@@ -3,7 +3,7 @@ import Connection, { ConnectionEventType } from '../../controllers/connection';
 import PopupMediator from '../../controllers/popupMediator';
 import { me } from '../../data/user';
 import { calculateExperienceNeededForNextLevel } from '../../utils';
-import { PopupMe } from '../popups/PopupMe';
+import { PopupSettings } from '../popups/PopupSettings';
 import { PopupTerminal } from '../popups/PopupTerminal';
 import ProgressBar from '../ProgressBar';
 
@@ -98,12 +98,20 @@ export default function Footer() {
           <span>{accessToken}</span>
         </button>
         <button
-          className="btn-taskbar align-right"
+          className="btn-taskbar align-right hide-mobile"
           onClick={() => {
             PopupMediator.open(PopupTerminal);
           }}
         >
           <i className="fas fa-keyboard"></i>
+        </button>
+        <button
+          className="btn-taskbar align-right"
+          onClick={() => {
+            PopupMediator.open(PopupSettings);
+          }}
+        >
+          <i className="fas fa-cog" />
         </button>
       </div>
     </footer>
