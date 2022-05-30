@@ -55,5 +55,14 @@
   "popupSettings_title": "Settings",
   "popupSettings_language_label": "Choose the platform language.",
   "popupSettings_language_warn": "You must reload the page for the changes to take effect.",
-  "popupSettings_reload": "Reload"
+  "popupSettings_reload": "Reload",
+  "popupLogin_title": "Login",
+  "popupLogin_forgotPassword": "Forgot your password?",
+  "popupRegister_validation_passwordLength": "Please enter a valid password. Must be at least 8 characters long.",
+  "popupRegister_validation_passwordMatch": "Please enter a valid password. Must be at least 8 characters long.",
+  "popupRegister_title": "Create account",
+  "popupRegister_label": "Enter a valid Email and password. You can change your username once your account is created.",
+  "popupRegister_confirmPassword": "Confirm password",
+  "popupRegister_warn": "The progress from your current session will be saved to your new account.",
+  "popupRegister_confirm": "Create account"
 }

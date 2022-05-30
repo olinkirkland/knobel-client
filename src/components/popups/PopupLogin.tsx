@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Connection from '../../controllers/connection';
+import { text } from '../../controllers/locale';
 import PopupMediator from '../../controllers/popupMediator';
 
 export function PopupLogin() {
@@ -24,14 +25,14 @@ export function PopupLogin() {
     <div className="modal">
       <div className="popup popup-login">
         <div className="popup-header">
-          <span>Login</span>
+          <span>{text('popupLogin_title')}</span>
           <button className="btn-link btn-close" onClick={PopupMediator.close}>
             <i className="fas fa-times" />
           </button>
         </div>
         <div className="popup-content">
           <div className="input-group">
-            <p>Email</p>
+            <p>{text('email')}</p>
             <input
               type="text"
               placeholder="john.doe@email.com"
@@ -41,7 +42,7 @@ export function PopupLogin() {
             />
           </div>
           <div className="input-group">
-            <p>Password</p>
+            <p>{text('password')}</p>
             <input
               type="password"
               placeholder="********"
@@ -71,11 +72,10 @@ export function PopupLogin() {
         </div>
         <div className="popup-taskbar">
           <button className="btn-link">
-            <span>Forgot password?</span>
+            <span>{text('popupLogin_forgotPassword')}</span>
           </button>
           <button className="btn" onClick={validateAndLogin}>
-            <i className="fas fa-sign-in-alt" />
-            <span>Login</span>
+            <span>{text('login')}</span>
           </button>
         </div>
       </div>

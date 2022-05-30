@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Connection from '../../controllers/connection';
+import { text } from '../../controllers/locale';
 import PopupMediator from '../../controllers/popupMediator';
 import { validateEmail, validatePassword } from '../../utils';
 
@@ -19,14 +20,12 @@ export function PopupRegister() {
     }
 
     if (!validatePassword(password)) {
-      setValidationMessage(
-        'Please enter a valid password. Must be at least 8 characters long.'
-      );
+      setValidationMessage(text('popupRegister_validation_passwordLength'));
       return;
     }
 
     if (password !== passwordConfirm) {
-      setValidationMessage('Passwords do not match.');
+      setValidationMessage(text('popupRegister_validation_passwordMatch'));
       return;
     }
 
@@ -39,19 +38,16 @@ export function PopupRegister() {
     <div className="modal">
       <div className="popup">
         <div className="popup-header">
-          <span>Create Account</span>
+          <span>{text('popupRegister_title')}</span>
           <button className="btn-link btn-close" onClick={PopupMediator.close}>
             <i className="fas fa-times" />
           </button>
         </div>
         <div className="popup-content">
-          <p>
-            Enter a valid Email and password. You can change your username once
-            your account is created.
-          </p>
+          <p>{text('popupRegister_label')}</p>
 
           <div className="input-group">
-            <p>Email</p>
+            <p>{text('email')}</p>
             <input
               type="text"
               placeholder="john.doe@email.com"
@@ -61,7 +57,7 @@ export function PopupRegister() {
             />
           </div>
           <div className="input-group">
-            <p>Password</p>
+            <p>{text('password')}</p>
             <input
               type="password"
               placeholder="********"
@@ -71,7 +67,7 @@ export function PopupRegister() {
             />
           </div>
           <div className="input-group">
-            <p>Confirm password</p>
+            <p>{text('popupRegister_confirmPassword')}</p>
             <input
               type="password"
               placeholder="********"
@@ -102,15 +98,12 @@ export function PopupRegister() {
 
           <div className="alert warn">
             <img src={'assets/avatars/system.png'} alt="" />
-            <span>
-              The progress from your current session will be saved to your new
-              account.
-            </span>
+            <span>{text('popupRegister_warn')}</span>
           </div>
         </div>
         <div className="popup-taskbar">
           <button className="btn" onClick={validateAndRegister}>
-            Create Account
+            {text('popupRegister_confirm')}
           </button>
         </div>
       </div>
