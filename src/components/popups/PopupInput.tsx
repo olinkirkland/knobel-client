@@ -1,13 +1,7 @@
-import Modal from 'react-modal';
 import React from 'react';
-import { PopupProps } from 'react-popup-manager';
-import { rootElement } from '../../index';
+import PopupMediator from '../../controllers/popupMediator';
 
-type State = {
-  input: string;
-};
-
-interface PopupInputProps extends PopupProps {
+interface PopupInputProps {
   title: string;
   message: string;
   placeholder: string;
@@ -15,69 +9,69 @@ interface PopupInputProps extends PopupProps {
   cancel: string;
   onConfirm: (text: string) => void;
   onCancel: () => void;
+  onClose?: () => void;
 }
 
-export class PopupInput extends React.Component<PopupInputProps> {
-  public readonly state: State = {
-    input: ''
-  };
+export function PopupInput(props: PopupInputProps) {
+  const [input, setInput] = React.useState('');
 
-  render() {
-    const {
-      isOpen,
-      title,
-      message,
-      placeholder,
-      onConfirm,
-      onCancel,
-      confirm,
-      cancel,
-      onClose
-    } = this.props;
-    return (
-      <Modal isOpen={isOpen!} appElement={rootElement!} className="modal">
-        <div className="popup">
-          <div className="popup-header">
-            <span>{title}</span>
-            <button className="btn-link btn-close" onClick={onClose}>
-              <i className="fas fa-times" />
-            </button>
-          </div>
-          <div className="popup-content">
-            <p>{message}</p>
-            <input
-              className="popup-input"
-              type="text"
-              placeholder={placeholder}
-              onChange={(event) => {
-                this.setState((state, props) => ({
-                  input: event.target.value
-                }));
-              }}
-            />
-          </div>
-          <div className="popup-taskbar">
-            <button
-              className="btn"
-              onClick={() => {
-                onCancel!();
-                onClose!();
-              }}
-            >
-              {cancel}
-            </button>
-            <button
-              className="btn"
-              onClick={() => {
-                onConfirm!(this.state.input);
-                onClose!();
-              }}
-            >
-              {confirm}
-            </button>
-          </div>
-        </div>
-      </Modal>
-    );
+  const {
+    title,
+    message,
+    placeholder,
+    onConfirm,
+    onCancel,
+    confirm,
+    cancel,
+    onClose
+  } = props;
+
+  function close() {
+    PopupMediator.close();
+    if (onClose) onClose();
   }
+
+  return (
+    <div className="modal">
+      <div className="popup">
+        <div className="popup-header">
+          <span>{title}</span>
+          <button className="btn-link btn-close" onClick={close}>
+            <i className="fas fa-times" />
+          </button>
+        </div>
+        <div className="popup-content">
+          <p>{message}</p>
+          <input
+            className="popup-input"
+            type="text"
+            placeholder={placeholder}
+            onChange={(event) => {
+              setInput(event.target.value);
+            }}
+          />
+        </div>
+        <div className="popup-taskbar">
+          <button
+            className="btn"
+            onClick={() => {
+              onCancel!();
+              close!();
+            }}
+          >
+            {cancel}
+          </button>
+          <button
+            className="btn"
+            onClick={() => {
+              onConfirm!(input);
+              close();
+            }}
+          >
+            {confirm}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -1,27 +1,21 @@
 import React from 'react';
-import Modal from 'react-modal';
-import { PopupProps } from 'react-popup-manager';
-import { rootElement } from '../../index';
+import PopupMediator from '../../controllers/popupMediator';
 import TerminalComponent from '../TerminalComponent';
 
-export class PopupTerminal extends React.Component<PopupProps> {
-  render() {
-    const { isOpen, onClose } = this.props;
-
-    return (
-      <Modal isOpen={isOpen!} appElement={rootElement!} className="modal">
-        <div className="popup">
-          <div className="popup-header">
-            <span>Terminal</span>
-            <button className="btn-link btn-close" onClick={onClose}>
-              <i className="fas fa-times" />
-            </button>
-          </div>
-          <div className="popup-content">
-            <TerminalComponent />
-          </div>
+export function PopupTerminal() {
+  return (
+    <div className="modal">
+      <div className="popup">
+        <div className="popup-header">
+          <span>Terminal</span>
+          <button className="btn-link btn-close" onClick={PopupMediator.close}>
+            <i className="fas fa-times" />
+          </button>
         </div>
-      </Modal>
-    );
-  }
+        <div className="popup-content">
+          <TerminalComponent />
+        </div>
+      </div>
+    </div>
+  );
 }

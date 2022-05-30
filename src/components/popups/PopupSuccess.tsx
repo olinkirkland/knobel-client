@@ -1,35 +1,31 @@
 import React from 'react';
-import Modal from 'react-modal';
-import { PopupProps } from 'react-popup-manager';
-import { rootElement } from '../../index';
+import PopupMediator from '../../controllers/popupMediator';
 
-interface PopupSuccessProps extends PopupProps {
+interface PopupSuccessProps {
   title: string;
   message: string;
 }
 
-export class PopupSuccess extends React.Component<PopupSuccessProps> {
-  render() {
-    const { isOpen, title, message, onClose } = this.props;
-    return (
-      <Modal isOpen={isOpen!} appElement={rootElement!} className="modal">
-        <div className="popup">
-          <div className="popup-header popup-success">
-            <span>{title}</span>
-            <button className="btn-link btn-close" onClick={onClose}>
-              <i className="fas fa-times" />
-            </button>
-          </div>
-          <div className="popup-content">
-            <p>{message}</p>
-          </div>
-          <div className="popup-taskbar">
-            <button className="btn" onClick={onClose}>
-              <span>OK</span>
-            </button>
-          </div>
+export function PopupSuccess(props: PopupSuccessProps) {
+  const { title, message } = props;
+  return (
+    <div className="modal">
+      <div className="popup">
+        <div className="popup-header popup-success">
+          <span>{title}</span>
+          <button className="btn-link btn-close" onClick={PopupMediator.close}>
+            <i className="fas fa-times" />
+          </button>
         </div>
-      </Modal>
-    );
-  }
+        <div className="popup-content">
+          <p>{message}</p>
+        </div>
+        <div className="popup-taskbar">
+          <button className="btn" onClick={PopupMediator.close}>
+            <span>OK</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }

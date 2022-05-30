@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { PopupProvider } from 'react-popup-manager';
 import App from './App';
 
 // Styles
@@ -24,14 +23,12 @@ import './assets/css/home-page-queries.css';
 import './assets/css/popups-queries.css';
 import './assets/css/shop-queries.css';
 
-export const rootElement = document.getElementById('root');
+const rootElement = document.getElementById('root');
 
 function Main() {
   return (
     <React.StrictMode>
-      <PopupProvider>
-        <App />
-      </PopupProvider>
+      <App />
     </React.StrictMode>
   );
 }

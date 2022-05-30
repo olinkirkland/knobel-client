@@ -2,7 +2,7 @@ import axios from 'axios';
 import EventEmitter from 'events';
 import { connect, Socket } from 'socket.io-client';
 import { PopupError } from '../components/popups/PopupError';
-import { PopupLoading } from '../components/popups/PopupLoading';
+import PopupLoading from '../components/popups/PopupLoading';
 import { PopupSuccess } from '../components/popups/PopupSuccess';
 import { me } from '../data/user';
 import PopupMediator from './popupMediator';
@@ -12,9 +12,8 @@ export const VERSION: string = '1.0.0';
 
 // eslint-disable-next-line no-restricted-globals
 export const DEV_MODE: boolean = location.hostname === 'localhost';
+export const AUTH_URL: string = 'https://knobel-auth.herokuapp.com/';
 export const SERVER_URL: string = 'http://localhost:3000/';
-export const AUTH_URL: string = 'http://localhost:3001/';
-export const SOCKET_URL: string = 'http://localhost:3002/';
 
 export enum ConnectionEventType {
   ACCESS_TOKEN_CHANGED = 'accessTokenChanged',
@@ -33,6 +32,8 @@ export default class Connection extends EventEmitter {
 
   private constructor() {
     super();
+
+    axios.defaults.withCredentials = true;
   }
 
   public initialize() {
@@ -196,7 +197,7 @@ export default class Connection extends EventEmitter {
     if (this.socket) this.socket.disconnect(); // Disconnect if already connected
 
     Terminal.log('🔌', 'Connecting to socket server', '...');
-    this.socket = connect(SOCKET_URL, {
+    this.socket = connect(SERVER_URL, {
       query: {
         token: this.refreshToken
       }

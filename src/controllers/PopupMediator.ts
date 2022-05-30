@@ -1,5 +1,5 @@
 import EventEmitter from 'events';
-import { OpenPopupOptions } from 'react-popup-manager/dist/src/__internal__/popupManagerInternal';
+import { ComponentType } from 'react';
 
 export enum PopupMediatorEventType {
   OPEN = 'open',
@@ -18,12 +18,9 @@ export default class PopupMediator extends EventEmitter {
     return this._instance || (this._instance = new this());
   }
 
-  public static open<T>(
-    componentClass: React.ComponentType<T>,
-    popupProps?: OpenPopupOptions<T>
-  ) {
+  public static open(componentType: ComponentType<any>, popupProps?: any) {
     PopupMediator.instance.emit(PopupMediatorEventType.OPEN, {
-      componentClass: componentClass,
+      componentType: componentType,
       popupProps: popupProps
     });
   }
