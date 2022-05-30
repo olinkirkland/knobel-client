@@ -18,7 +18,6 @@ export function PopupLogin() {
 
     // Login
     Connection.instance.login(email, password);
-    PopupMediator.close();
   }
 
   return (

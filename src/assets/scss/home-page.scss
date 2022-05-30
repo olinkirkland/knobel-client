@@ -10,7 +10,7 @@
 
   .home-container {
     display: flex;
-    background-color: white;
+    background-color$text-inverse;
     height: 40rem;
     max-height: 100%;
     border-radius: 5px;
@@ -65,7 +65,7 @@
       text-transform: uppercase;
       font-weight: bold;
       padding: 1rem 1rem;
-      color: white;
+      color$text-inverse;
       letter-spacing: 1px;
     }
 

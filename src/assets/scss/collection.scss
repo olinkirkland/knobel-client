@@ -27,7 +27,7 @@
       cursor: pointer;
       aspect-ratio: 1;
       border-radius: 5px;
-      background-color: white;
+      background-color$text-inverse;
       padding: 0.4rem;
       transition: all 0.3s;
       position: relative;
@@ -45,7 +45,7 @@
       .quantity {
         position: absolute;
         background-color: $primary;
-        color: white;
+        color$text-inverse;
         padding: 0.2rem 0.6rem;
         border-radius: 5px;
         bottom: 0.2rem;

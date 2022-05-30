@@ -22,6 +22,7 @@ import { PopupRegister } from './PopupRegister';
 
 export function PopupMe() {
   const [avatar, setAvatar] = useState(me.avatar);
+  const [wallpaper, setWallpaper] = useState(me.wallpaper);
 
   useEffect(() => {
     Connection.instance.addListener(
@@ -39,6 +40,7 @@ export function PopupMe() {
 
   function onUserDataChange() {
     setAvatar(me.avatar!);
+    setWallpaper(me.wallpaper!);
   }
 
   return (

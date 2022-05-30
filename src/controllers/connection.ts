@@ -13,7 +13,7 @@ export const VERSION: string = '1.0.0';
 // eslint-disable-next-line no-restricted-globals
 export const DEV_MODE: boolean = location.hostname === 'localhost';
 export const AUTH_URL: string = 'https://knobel-auth.herokuapp.com/';
-export const SERVER_URL: string = 'http://localhost:3000/';
+export const SERVER_URL: string = 'https://knobel-main.herokuapp.com/';
 
 export enum ConnectionEventType {
   ACCESS_TOKEN_CHANGED = 'accessTokenChanged',
