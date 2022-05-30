@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Connection, { ConnectionEventType } from '../../controllers/connection';
+import { text } from '../../controllers/locale';
 import PopupMediator from '../../controllers/popupMediator';
 import { me } from '../../data/user';
 import { PopupInputVerifyCode } from '../popups/PopupInputVerifyCode';
@@ -39,24 +40,24 @@ export default function HomePage() {
             onClick={() => {
               // Connection.instance.joinRandomGame();
             }}
-            titleText="Join a Random Match"
-            buttonText="Quick Play"
+            titleText={text('homeTile_quickPlay_title')}
+            buttonText={text('homeTile_quickPlay_cta')}
             image="assets/images/abstract-1.png"
           />
           <HomePanel
             onClick={() => {
               PopupMediator.open(PopupShop);
             }}
-            titleText="Avatars &amp; Wallpapers"
-            buttonText="Shop"
+            titleText={text('homeTile_shop_title')}
+            buttonText={text('homeTile_shop_cta')}
             image="assets/images/abstract-2.png"
           />
           <HomePanel
             onClick={() => {
               // PopupMediator.open(PopupHostGame);
             }}
-            titleText="Host or Join a Custom Game"
-            buttonText="Custom Game"
+            titleText={text('homeTile_customGame_title')}
+            buttonText={text('homeTile_customGame_cta')}
             image="assets/images/abstract-4.png"
           />
           {isRegistered && isVerified && (
@@ -64,8 +65,8 @@ export default function HomePage() {
               onClick={() => {
                 PopupMediator.open(PopupMe);
               }}
-              titleText="Customize My Profile"
-              buttonText="My Profile"
+              titleText={text('homeTile_profile_title')}
+              buttonText={text('homeTile_profile_cta')}
               image="assets/images/abstract-5.png"
             />
           )}
@@ -74,8 +75,8 @@ export default function HomePage() {
               onClick={() => {
                 PopupMediator.open(PopupInputVerifyCode);
               }}
-              titleText="Get a FREE Gift!"
-              buttonText="Verify Email"
+              titleText={text('homeTile_verifyEmail_title')}
+              buttonText={text('homeTile_verifyEmail_cta')}
               image="assets/images/verify-gift.png"
             />
           )}
@@ -84,8 +85,8 @@ export default function HomePage() {
               onClick={() => {
                 PopupMediator.open(PopupRegister);
               }}
-              titleText="Register with an Email"
-              buttonText="Sign Up"
+              titleText={text('homeTile_quickPlay_title')}
+              buttonText={text('homeTile_quickPlay_cta')}
               image="assets/images/abstract-5.png"
             />
           )}
