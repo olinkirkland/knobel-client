@@ -141,7 +141,10 @@ export function PopupMe() {
                           countNameChanges()
                         ),
                         placeholder: me.name!,
-                        confirm: text('popupChangeName_confirm', countNameChanges()),
+                        confirm: text(
+                          'popupChangeName_confirm',
+                          countNameChanges()
+                        ),
                         cancel: text('cancel'),
                         onConfirm: (text: string) => {
                           Connection.instance.editName(text);
@@ -239,22 +242,22 @@ export function PopupMe() {
                 {me.isRegistered && (
                   <button
                     className="btn"
-                    onClick={() =>
+                    onClick={() => {
                       PopupMediator.open(PopupPrompt, {
-                        title: 'Are you sure?',
-                        message: 'This will log you out.',
-                        confirm: 'Log Out',
-                        cancel: 'Cancel',
+                        title: text('promptLogout_title'),
+                        message: text('promptLogout_message'),
+                        confirm: text('promptLogout_confirm'),
+                        cancel: text('cancel'),
                         onConfirm: () => {
                           Connection.instance.logout();
                         },
                         onCancel: () => {
                           PopupMediator.close();
                         }
-                      })
-                    }
+                      });
+                    }}
                   >
-                    Logout
+                    {text('logOut')}
                   </button>
                 )}
               </div>
