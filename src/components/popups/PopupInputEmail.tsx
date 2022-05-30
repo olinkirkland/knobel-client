@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 import Connection from '../../controllers/connection';
+import { text } from '../../controllers/locale';
 import PopupMediator from '../../controllers/popupMediator';
 import { validateEmail } from '../../utils';
-
-type State = {
-  email: string;
-  password: string;
-  validationMessage: string | null;
-};
 
 export function PopupInputEmail() {
   const [email, setEmail] = useState('');
@@ -32,16 +27,16 @@ export function PopupInputEmail() {
     <div className="modal">
       <div className="popup">
         <div className="popup-header">
-          <span>Change Email</span>
+          <span>{text('popupEmail_title')}</span>
           <button className="btn-link btn-close" onClick={PopupMediator.close}>
             <i className="fas fa-times" />
           </button>
         </div>
         <div className="popup-content">
-          <p>Enter your password and a new Email address.</p>
+          <p>{text('popupEmail_label')}</p>
 
           <div className="input-group">
-            <p>Current password</p>
+            <p>{text('currentPassword')}</p>
             <input
               type="password"
               placeholder="********"
@@ -53,12 +48,11 @@ export function PopupInputEmail() {
 
           <div className="alert warn">
             <img src={'assets/avatars/system.png'} alt="" />
-            Make sure your Email is reachable. We don't send spam and we don't
-            share your Email address with anybody.
+            {text('popupEmail_warn')}
           </div>
 
           <div className="input-group">
-            <p>Your new Email</p>
+            <p>{text('popupEmail_newEmail')}</p>
             <input
               type="text"
               placeholder="john.doe@email.com"
@@ -84,7 +78,7 @@ export function PopupInputEmail() {
         </div>
         <div className="popup-taskbar">
           <button className="btn" onClick={validateChangeEmail}>
-            Change Email
+            {text('popupEmail_confirm')}
           </button>
         </div>
       </div>

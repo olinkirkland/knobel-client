@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Connection, { ConnectionEventType } from '../../controllers/connection';
+import { text } from '../../controllers/locale';
 import PopupMediator from '../../controllers/popupMediator';
 import { getItemById } from '../../data/item';
 import { me } from '../../data/user';
@@ -47,7 +48,7 @@ export function PopupMe() {
     <div className="modal">
       <div className="popup popup-profile">
         <div className="popup-header">
-          <span>My Profile</span>
+          <span>{text('popupMe_title')}</span>
           <button
             className="btn-link btn-close"
             onClick={() => {
@@ -65,10 +66,7 @@ export function PopupMe() {
                   <>
                     <div className="alert warn">
                       <img src={'assets/avatars/system.png'} alt="" />
-                      <span>
-                        Sign up to save your progress and customize your
-                        profile.
-                      </span>
+                      <span>{text('popupMe_warn_notRegistered')}</span>
                     </div>
                   </>
                 )) ||
@@ -77,13 +75,7 @@ export function PopupMe() {
                       <div className="alert warn">
                         <img src={'assets/avatars/system.png'} alt="" />
                         <div className="v-group">
-                          <span>
-                            You've been sent an Email to verify your Email
-                            address.
-                            <br />
-                            Once your Email is verified, you'll receive a
-                            welcome gift.
-                          </span>
+                          <span>{text('popupMe_warn_notVerified')}</span>
                         </div>
                       </div>
                       <div className="v-group center">
@@ -94,7 +86,7 @@ export function PopupMe() {
                           }}
                         >
                           <i className="fas fa-envelope" />
-                          Verify Email
+                          {text('verifyEmail')}
                         </button>
                       </div>
                     </>
@@ -112,7 +104,7 @@ export function PopupMe() {
             {me.isRegistered && me.isVerified && (
               <span className="badge verified">
                 <i className="fas fa-check" />
-                Verified
+                {text('verified')}
               </span>
             )}
             <h1>{me.name}</h1>
@@ -123,7 +115,9 @@ export function PopupMe() {
             </span>
             <div className="h-group">
               <div className="level-group v-group center">
-                <span>{`Level ${me.level}`}</span>
+                <span>
+                  {text('level')} {me.level}
+                </span>
                 <ProgressBar
                   percent={Math.min(
                     me.experience! /
@@ -141,13 +135,14 @@ export function PopupMe() {
                     }`}
                     onClick={() => {
                       PopupMediator.open(PopupInput, {
-                        title: 'Change your name',
-                        message: `Choose a new username for your profile. This name will appear to other players. You have ${countNameChanges()} name change${
-                          countNameChanges() !== 1 ? 's' : ''
-                        } remaining.`,
+                        title: text('popupChangeName_title'),
+                        message: text(
+                          'popupChangeName_message',
+                          countNameChanges()
+                        ),
                         placeholder: me.name!,
-                        confirm: `Change (${countNameChanges()})`,
-                        cancel: 'Cancel',
+                        confirm: text('popupChangeName_confirm', countNameChanges()),
+                        cancel: text('cancel'),
                         onConfirm: (text: string) => {
                           Connection.instance.editName(text);
                         },
@@ -156,17 +151,17 @@ export function PopupMe() {
                     }}
                   >
                     <i className="fas fa-pen" />
-                    Change name ({countNameChanges()}x)
+                    {text('editName', countNameChanges())}
                   </button>
                   <button
                     className="btn"
                     onClick={() => {
                       PopupMediator.open(PopupInput, {
-                        title: 'Edit your status',
-                        message: 'Enter a new status for your profile.',
+                        title: text('popupEditStatus_title'),
+                        message: text('popupEditStatus_message'),
                         placeholder: me.note!,
-                        confirm: 'Change',
-                        cancel: 'Cancel',
+                        confirm: text('popupEditStatus_confirm'),
+                        cancel: text('cancel'),
                         onConfirm: (text: string) => {
                           Connection.instance.editNote(text);
                         },
@@ -175,12 +170,12 @@ export function PopupMe() {
                     }}
                   >
                     <i className="fas fa-pen" />
-                    Change status
+                    {text('editStatus')}
                   </button>
                 </div>
                 <div className="panel v-group">
                   <div className=" profile-editable-item">
-                    <span className="muted">Email</span>
+                    <span className="muted">{text('email')}</span>
                     <span>{me.email}</span>
                     <button
                       className="btn-link"
@@ -192,7 +187,7 @@ export function PopupMe() {
                     </button>
                   </div>
                   <div className="profile-editable-item">
-                    <span className="muted">Password</span>
+                    <span className="muted">{text('password')}</span>
                     <span>********</span>
                     <button
                       className="btn-link"
@@ -208,11 +203,11 @@ export function PopupMe() {
             )}
             <div className="profile-collections">
               <AvatarItemCollection
-                title="Avatars"
+                title={text('avatars')}
                 items={me.getItems().filter((item) => item.type === 'avatar')}
               />
               <WallpaperItemCollection
-                title="Wallpapers"
+                title={text('wallpapers')}
                 items={me
                   .getItems()
                   .filter((item) => item.type === 'wallpaper')}

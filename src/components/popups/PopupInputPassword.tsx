@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Connection from '../../controllers/connection';
+import { text } from '../../controllers/locale';
 import PopupMediator from '../../controllers/popupMediator';
 import { validatePassword } from '../../utils';
 
@@ -14,14 +15,12 @@ export function PopupInputPassword() {
   function validateAndChangePassword() {
     // Validation
     if (!validatePassword(password)) {
-      setValidationMessage(
-        'Please enter a valid password. Must be at least 8 characters long.'
-      );
+      setValidationMessage(text('popupPassword_validation_passwordLength'));
       return;
     }
 
     if (password !== confirmPassword) {
-      setValidationMessage('Passwords do not match.');
+      setValidationMessage(text('popupPassword_validation_passwordMatch'));
       return;
     }
 
@@ -35,16 +34,16 @@ export function PopupInputPassword() {
     <div className="modal">
       <div className="popup">
         <div className="popup-header">
-          <span>Change Password</span>
+          <span>{text('popupPassword_title')}</span>
           <button className="btn-link btn-close" onClick={PopupMediator.close}>
             <i className="fas fa-times" />
           </button>
         </div>
         <div className="popup-content">
-          <p>Enter your current password and your new password to change it.</p>
+          <p>{text('popupPassword_label')}</p>
 
           <div className="input-group">
-            <p>Current password</p>
+            <p>{text('currentPassword')}</p>
             <input
               type="password"
               placeholder="********"
@@ -56,12 +55,11 @@ export function PopupInputPassword() {
 
           <div className="alert warn">
             <img src={'assets/avatars/system.png'} alt="" />
-            Make sure your password has a good mix of upper and lowercase
-            letters. Don't tell anyone your password!
+            {text('popupPassword_warn')}
           </div>
 
           <div className="input-group">
-            <p>New password</p>
+            <p>{text('popupPassword_newPassword')}</p>
             <input
               type="password"
               placeholder="********"
@@ -71,7 +69,7 @@ export function PopupInputPassword() {
             />
           </div>
           <div className="input-group">
-            <p>Confirm new password</p>
+            <p>{text('popupPassword_confirmNewPassword')}</p>
             <input
               type="password"
               placeholder="********"
@@ -102,7 +100,7 @@ export function PopupInputPassword() {
         </div>
         <div className="popup-taskbar">
           <button className="btn" onClick={validateAndChangePassword}>
-            Change Password
+            {text('popupPassword_confirm')}
           </button>
         </div>
       </div>

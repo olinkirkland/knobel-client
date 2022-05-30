@@ -40,7 +40,7 @@ export function setAppLanguage(value: Language) {
 
 export function text(key: string, ...args: any[]): string {
   const value = locale[key] ? locale[key] : `[${key}]`;
-  if (!locale[key]) console.log('Missing translation:', key);
+  if (!locale[key]) console.error(key);
   // Replace all instances of '%%' in the string with the passed in arguments
   return value.replace(/%%/g, () => args.shift());
 }
