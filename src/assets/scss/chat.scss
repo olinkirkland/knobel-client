@@ -1,0 +1,119 @@
+@import "colors";
+
+ul.chat-messages {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.chat-message {
+  width: 100%;
+  display: flex;
+  position: relative;
+  margin-top: 2rem;
+  padding-right: 1rem;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &.is-block {
+    margin-top: 0.6rem;
+  }
+
+  .chat-card {
+    display: flex;
+    align-items: flex-start;
+    position: absolute;
+
+    font-size: 1.4rem;
+
+    img {
+      position: relative;
+      top: -0.4rem;
+      width: 4.5rem;
+      padding: 0.2rem;
+      margin-right: 0.4rem;
+      border-radius: 50%;
+      background-color: white;
+      border: 3px solid $panel-inset;
+    }
+
+    span {
+      color: $text;
+    }
+
+    .badge {
+      margin-right: 0.4rem;
+      color: white;
+    }
+  }
+  &.chat-message-self {
+    .chat-card {
+      img {
+        background-color: white;
+      }
+    }
+
+    .chat-text {
+      color: white;
+      background-color: $primary;
+
+      button.chat-link {
+        color: white;
+      }
+    }
+  }
+
+  .chat-text {
+    background-color: white;
+    border-radius: 15px;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 15px;
+    color: $text;
+    margin-left: 3.2rem;
+    margin-top: 2.6rem;
+    max-width: 100%;
+
+    button.chat-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      color: $primary;
+      background-color: transparent;
+      padding: 0;
+      border-radius: 0;
+      text-decoration: none;
+      text-align: left;
+      border-bottom: 1px dashed currentColor;
+      text-transform: none;
+      margin-right: 0.4rem;
+      opacity: 1;
+
+      font-size: inherit;
+      letter-spacing: inherit;
+
+      transition: all 0.3s;
+
+      &:hover {
+        opacity: 0.8;
+        border-bottom: 1px dashed transparent;
+      }
+    }
+
+    &.is-block {
+      margin-top: 0;
+    }
+  }
+}
+
+.chat-input-container {
+  display: flex;
+  gap: 1.2rem;
+  padding-right: 0.2rem;
+  align-items: center;
+
+  input {
+    width: 100%;
+  }
+}

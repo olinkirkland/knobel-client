@@ -4,6 +4,7 @@ import { text } from '../../controllers/locale';
 import PopupMediator from '../../controllers/popupMediator';
 import { me } from '../../data/user';
 import { calculateExperienceNeededForNextLevel } from '../../utils';
+import { PopupChatRooms as PopupChat } from '../popups/PopupChatRooms';
 import { PopupSettings } from '../popups/PopupSettings';
 import { PopupTerminal } from '../popups/PopupTerminal';
 import ProgressBar from '../ProgressBar';
@@ -82,13 +83,18 @@ export default function Footer() {
           <img className="" src="assets/icons/coin.png" alt="" />
           <span>{`${gold}`}</span>
         </button>
-        <button className="btn-taskbar">
+        <button
+          className="btn-taskbar"
+          onClick={() => {
+            PopupMediator.open(PopupChat);
+          }}
+        >
           <i className="fas fa-comment-alt" />
           <span className="hide-mobile">{text('chat')}</span>
         </button>
       </div>
       <div className="taskbar-group">
-        <button className="btn-taskbar  align-right disabled hide-mobile">
+        {/* <button className="btn-taskbar  align-right disabled hide-mobile">
           <i className="fas fa-key" />
           <span>{refreshToken}</span>
         </button>
@@ -100,7 +106,7 @@ export default function Footer() {
         >
           <i className="fas fa-sync-alt" />
           <span>{accessToken}</span>
-        </button>
+        </button> */}
         <button
           className="btn-taskbar align-right hide-mobile"
           onClick={() => {

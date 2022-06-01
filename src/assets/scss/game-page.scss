@@ -1,0 +1,44 @@
+@import "colors";
+
+.game-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  height: 100%;
+  transition: all 0.3s;
+
+  .game-container {
+    display: flex;
+    color: $text;
+    height: 40rem;
+    max-height: 100%;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 5px 0px;
+    width: 128rem;
+    gap: 1.2rem;
+
+    > div {
+      background-color: white;
+      border-radius: 5px;
+      padding: 2rem;
+      width: 100%;
+    }
+
+    .game-list {
+      display: flex;
+      flex-direction: column;
+      width: 32rem;
+
+      .game-list-header {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      ul {
+        height: 100%;
+        overflow-y: auto;
+      }
+    }
+  }
+}

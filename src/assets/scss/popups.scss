@@ -47,6 +47,12 @@
       max-width: 40rem;
     }
 
+    &.popup-chat {
+      width: 120rem;
+      max-width: 120rem;
+      height: 100%;
+    }
+
     &.popup-shop {
       width: 120rem;
       max-width: 120rem;
@@ -68,7 +74,7 @@
       align-items: center;
       justify-content: center;
       min-width: 0;
-      color: $text-inverse;
+      color: white;
       background-color: $text;
       border: 1px solid #00000020;
     }
@@ -201,7 +207,7 @@ ul.game-list {
 
 li.join-game-tile {
   padding: 1rem;
-  background-color: $text-inverse;
+  background-color: white;
   position: relative;
   opacity: 1;
   cursor: pointer;

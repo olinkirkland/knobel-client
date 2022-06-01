@@ -4,6 +4,7 @@ import { connect, Socket } from 'socket.io-client';
 import { PopupError } from '../components/popups/PopupError';
 import PopupLoading from '../components/popups/PopupLoading';
 import { PopupSuccess } from '../components/popups/PopupSuccess';
+import Chat from '../data/chat';
 import { me } from '../data/user';
 import PopupMediator from './popupMediator';
 import Terminal, { TerminalEventType } from './terminal';
@@ -13,11 +14,13 @@ export const VERSION: string = '1.0.0';
 // eslint-disable-next-line no-restricted-globals
 export const DEV_MODE: boolean = location.hostname === 'localhost';
 export const AUTH_URL: string = 'https://knobel-auth.herokuapp.com/';
-export const SERVER_URL: string = 'https://knobel-main.herokuapp.com/';
+// export const SERVER_URL: string = 'https://knobel-main.herokuapp.com/';
+export const SERVER_URL: string = 'http://localhost:3000/';
 
 export enum ConnectionEventType {
   ACCESS_TOKEN_CHANGED = 'accessTokenChanged',
-  USER_DATA_CHANGED = 'userDataChanged'
+  USER_DATA_CHANGED = 'userDataChanged',
+  CHAT_MESSAGE = 'CHAT_MESSAGE'
 }
 
 export default class Connection extends EventEmitter {
@@ -29,6 +32,7 @@ export default class Connection extends EventEmitter {
 
   // Socket
   private socket!: Socket;
+  public chats: Chat[] = [];
 
   private constructor() {
     super();
@@ -116,6 +120,17 @@ export default class Connection extends EventEmitter {
       Terminal.log('✔️ User data fetched');
       Object.assign(me, res.data);
       this.emit(ConnectionEventType.USER_DATA_CHANGED);
+    } catch (err) {
+      Terminal.log('❌', `${err}`);
+    }
+  }
+
+  public async joinChatRoom(roomId: string) {
+    try {
+      await axios.post(SERVER_URL + 'rooms/join', {
+        roomId
+      });
+      Terminal.log('✔️ Joined chat room', roomId);
     } catch (err) {
       Terminal.log('❌', `${err}`);
     }
@@ -210,11 +225,21 @@ export default class Connection extends EventEmitter {
       PopupMediator.close();
     });
 
+    this.socket?.on('chat', (data: Chat) => {
+      this.chats.push(data);
+      this.emit(ConnectionEventType.CHAT_MESSAGE, data);
+    });
+
     // On invalidate
     this.socket?.on('invalidate', () => {
       console.log('--invalidate');
       this.fetchMyUserData();
     });
+  }
+
+  public sendChatMessage(message: string) {
+    console.log('💬', message);
+    this.socket?.emit('chat', message);
   }
 
   public async logout() {

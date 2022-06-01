@@ -85,8 +85,8 @@ export default function HomePage() {
               onClick={() => {
                 PopupMediator.open(PopupRegister);
               }}
-              titleText={text('homeTile_quickPlay_title')}
-              buttonText={text('homeTile_quickPlay_cta')}
+              titleText={text('homeTile_register_title')}
+              buttonText={text('homeTile_register_cta')}
               image="assets/images/abstract-5.png"
             />
           )}

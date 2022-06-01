@@ -5,7 +5,7 @@ button {
   font-family: "Outfit", serif;
   border: none;
   transition: all 0.3s;
-  color: $text-inverse;
+  color: white;
 
   display: flex;
   align-items: center;
@@ -63,7 +63,7 @@ button.btn {
   }
 
   &:hover {
-    background-color: #00000090;
+    background-color: #00000085;
   }
 
   &:active {
@@ -71,6 +71,7 @@ button.btn {
   }
 
   &.selected {
+    cursor: inherit;
     background-color: $primary;
     box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.05);
   }
@@ -91,7 +92,7 @@ button.btn-flag {
   &.selected {
     background-color: $primary;
     box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.05);
-    color: $text-inverse !important;
+    color: white !important;
 
     &:hover {
       background-color: $primary !important;

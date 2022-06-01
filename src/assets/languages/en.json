@@ -26,6 +26,7 @@
   "popupMe_title": "My Profile",
   "popupMe_warn_notRegistered": "Sign up to save your progress and customize your profile.",
   "popupMe_warn_notVerified": "You've been sent an Email to verify your Email address. Once your Email is verified, you'll receive a free gift.",
+  "verified": "Verified",
   "verifyEmail": "Verify Email",
   "editName": "Change Name (%%x)",
   "editStatus": "Edit Status",

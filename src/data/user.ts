@@ -26,6 +26,7 @@ export class Me extends User {
   friendRequestsOutgoing?: User[];
   inventory?: string[]; // Item IDs
   gameID?: string | null;
+  currentChatRoomId?: string | null;
 
   public getItems(): Item[] {
     return this.inventory!.map((itemId) => getItemById(itemId)!);

@@ -59,6 +59,13 @@ export function PopupShop() {
       .catch((err) => {
         Terminal.log('⚠️', err);
       });
+
+    return () => {
+      Connection.instance.removeListener(
+        ConnectionEventType.USER_DATA_CHANGED,
+        onUserDataChange
+      );
+    };
   }, []);
 
   const [value, setValue] = useState(0); // integer state

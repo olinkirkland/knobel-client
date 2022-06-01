@@ -8,6 +8,7 @@ import './assets/css/buttons.css';
 import './assets/css/checkbox.css';
 import './assets/css/general.css';
 import './assets/css/home-page.css';
+import './assets/css/game-page.css';
 import './assets/css/input.css';
 import './assets/css/platform.css';
 import './assets/css/popups.css';
@@ -16,6 +17,7 @@ import './assets/css/progress-bar.css';
 import './assets/css/shop.css';
 import './assets/css/terminal.css';
 import './assets/css/collection.css';
+import './assets/css/chat.css';
 
 // Media Queries
 import './assets/css/platform-queries.css';

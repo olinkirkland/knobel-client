@@ -197,7 +197,12 @@ export function ShopCollection({
                   </button>
                 </>
               )}
-              {inventory!.indexOf(item.id)! >= 0 && <p>{text('shop_owned')}</p>}
+              {inventory!.indexOf(item.id)! >= 0 && (
+                <div className="h-group center">
+                  <i className="fas fa-check" />
+                  <p>{text('shop_owned')}</p>
+                </div>
+              )}
             </div>
           </li>
         ))}
