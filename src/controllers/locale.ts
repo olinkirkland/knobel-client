@@ -33,7 +33,7 @@ export function setLanguageForNextStart(value: Language) {
 
 export function text(key: string, ...args: any[]): string {
   const value = locale[key] ? locale[key] : `[${key}]`;
-  if (!locale[key]) console.error(key);
+  if (!locale[key]) console.warn(key);
   // Replace all instances of '%%' in the string with the passed in arguments
   return value.replace(/%%/g, () => args.shift());
 }
