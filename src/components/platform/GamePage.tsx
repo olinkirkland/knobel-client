@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SERVER_URL } from '../../controllers/connection';
 import { text } from '../../controllers/locale';
 import Terminal from '../../controllers/terminal';
@@ -9,19 +9,43 @@ import { me } from '../../data/user';
 export default function GamePage() {
   const [games, setGames] = useState<Game[]>([]);
 
-  function fetchGames() {
-    axios.get(SERVER_URL + 'game/list').then((response) => {
-      setGames(response.data);
-    });
+  useEffect(() => {
+    fetchGames();
+  }, []);
+
+  async function fetchGames() {
+    try {
+      const res = await axios.get(SERVER_URL + 'game/list');
+      setGames(res.data);
+    } catch (err) {
+      Terminal.log('❌', `${err}`);
+    }
   }
 
-  function host() {
-    axios
-      .post(SERVER_URL + 'game/host', { name: `${me.name}'s game` })
-      .then((res) => {})
-      .catch((err) => {
-        Terminal.log('⚠️', err);
-      });
+  async function join(id: string) {
+    Terminal.log('Joining game', id, '...');
+    try {
+      const res = await axios.post(SERVER_URL + 'game/join', { id: id });
+      Terminal.log('Joined game', id, 'successfully');
+    } catch (err) {
+      Terminal.log('❌', `${err}`);
+    }
+  }
+
+  async function host() {
+    Terminal.log('Hosting a game...');
+    try {
+      const options = {
+        name: `${me.name}'s game`
+      };
+      const res = await axios.post(SERVER_URL + 'game/host', options);
+      console.log(res);
+      const gameId = res.data;
+      Terminal.log('Game created', gameId);
+      join(gameId);
+    } catch (err) {
+      Terminal.log('❌', `${err}`);
+    }
   }
 
   return (
